@@ -1,0 +1,10 @@
+*.pyc
+*~
+__pycache__
+myvenv
+db.sqlite3
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+/static
+.DS_Store
