@@ -1,0 +1,21 @@
+<h1>DETAIL PAGE</h1>
+<h3><a href="{% url 'index' %}">HOME</a></h3>
+
+{{detail_post.title}} <br>
+{{detail_post.author}} <br>
+{{detail_post.desc}} <br>
+{{detail_post.create_at}} <br>
+
+
+<a href="{% url 'update' detail_post.id %}">수정</a>
+<a href="{% url 'delete' detail_post.id%}">삭제</a>
+
+<form action="{% url 'create_comment' detail_post.id %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" value='작성'>
+</form>
+
+{% for com in comment_all%}
+ㄴ{{com}} <a href="{% url 'comment_delete' detail_post.id com.id %}">X</a> <br>
+{%endfor%}

@@ -16,4 +16,4 @@ class SignUpView(CreateView): # 회원가입 기본 뷰 상속
 
 # 회원가입 성공 뷰
 class SuccessSignUpView(TemplateView):
-    template_name = 'registration/success_signup.html'
+    template_name = 'success_signup.html'
