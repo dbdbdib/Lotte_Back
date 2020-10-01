@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from account.views import SignUpView, SuccessSignUpView
+from board.views import main, food, chem, retail, tour
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', SignUpView.as_view(), name='signup'), # name 넣는 것 필수 (안 하면 오류나더라)
     path('sucess_signup/', SuccessSignUpView.as_view(), name='success_signup'),
+    path('', main, name='main'),
+    path('food/', food, name='food'),
+    path('retail/', retail, name='retail'),
+    path('chem/', chem, name='chem'),
+    path('tour/', tour, name='tour'),
 ]
