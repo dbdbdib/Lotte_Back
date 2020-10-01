@@ -2,6 +2,7 @@
 *~
 __pycache__
 myvenv
+dbdbvenv
 db.sqlite3
 **/migrations/**
 !**/migrations
