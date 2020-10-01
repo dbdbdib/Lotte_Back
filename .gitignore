@@ -10,3 +10,4 @@ FETCH_HEAD
 !**/migrations/__init__.py
 /static
 .DS_Store
+migrations

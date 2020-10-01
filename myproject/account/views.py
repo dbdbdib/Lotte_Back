@@ -10,7 +10,7 @@ from .forms import SignUpForm
 class SignUpView(CreateView): # 회원가입 기본 뷰 상속
     template_name = 'signup.html'
     form_class = SignUpForm # 폼은 SignUpForm 사용
-    suceess_url = reverse_lazy('success_signup') # reverse_laze : 해당 url로 실행
+    success_url = reverse_lazy('success_signup') # reverse_laze : 해당 url로 실행
 
 
 
