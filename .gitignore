@@ -2,7 +2,9 @@
 *~
 __pycache__
 myvenv
-dbdbvenv
 db.sqlite3
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
 /static
 .DS_Store
