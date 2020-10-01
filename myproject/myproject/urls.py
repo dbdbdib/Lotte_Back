@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from account.views import SignUpView, SuccessSignUpView
+from account.views import SignUpView, SuccessSignUpView, SignInView, MainPageView
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('signup/', SignUpView.as_view(), name='signup'), # name 넣는 것 필수 (안 하면 오류나더라)
-    path('sucess_signup/', SuccessSignUpView.as_view(), name='success_signup'),
+    path('', MainPageView.as_view(), name='mainpage'), # name 넣는 것 필수 (안 하면 오류나더라)
+    path('signup/', SignUpView.as_view(), name='signup'),
+    path('success_signup/', SuccessSignUpView.as_view(), name='success_signup'),
+    path('signin/', SignInView.as_view(), name='signin'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+
 ]

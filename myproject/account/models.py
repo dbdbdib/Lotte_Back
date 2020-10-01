@@ -51,20 +51,26 @@ class UserManager(BaseUserManager): # BaseUserManager : User 생성 시 모델 �
 # AbstractBaseUser : 이것을 상속받아 모델을 재구성 (AbstractUser는 기본 필드 모델을 새로 정의할 수 없기 때문에 사용 X)
 # PermissionsMixin : 권한 관련(is_staff 등) 모여있는 클래스 - 상속받아 모델 재구성
 class User(AbstractBaseUser, PermissionsMixin):
-    # 취준생 or 현직자(일 경우 계열까지) 선택
-    LINE_CHOICES = (
+    # 취준생 or 현직자 구분 선택
+    DIVISION_CHOICES = (
         (0, '취준생'),
-        (1, '식품'),
-        (2, '유통'),
-        (3, '화학/건설/제조'),
-        (4, '관광/서비스/금융')
+        (1, '현직자'),
+    )
+    
+    # 현직자일 경우 계열 선택
+    LINE_CHOICES = (
+        (0, '식품'),
+        (1, '유통'),
+        (2, '화학/건설/제조'),
+        (3, '관광/서비스/금융')
     )
     
     # 필드 정의
     email = models.EmailField('이메일', unique=True)
     nickname = models.CharField('닉네임', max_length=20)
     picture = models.ImageField('프로필 사진', null=True, default="./static/img/userdefaultimg.png")
-    line = models.IntegerField('계열', choices = LINE_CHOICES)
+    division = models.IntegerField('가입 구분', choices = DIVISION_CHOICES)
+    line = models.IntegerField('계열', choices = LINE_CHOICES, null=True)
     is_staff = models.BooleanField('staff',default=False) # is_staff는 넣어야 함 (is_superuser는 이미 있어서 O)
 
     objects = UserManager() # Manager 지정

@@ -128,3 +128,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 업로드된 파일 저장 디렉
 
 # AbstractUser 상속 시 필수
 AUTH_USER_MODEL = "account.User"
+
+# 로그인, 로그아웃 시 REDIRECT 경로 (mainpage)
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
