@@ -22,7 +22,7 @@ def create(request):
             clean_form = temp_form.save()
             # 추후에 User.id 할당해야해
             clean_form.save()
-            return redirect('index')
+            return redirect('post')
         else:
             context['write_form'] = temp_form
             return render(request, 'write.html', context)
@@ -46,7 +46,7 @@ def update(request,post_id):
         
         if temp_form.is_valid():
             temp_form.save()
-            return redirect('index')
+            return redirect('post')
         else:
             context["write_form"] = temp_form
             return render(request,'write.html',context)
@@ -62,7 +62,7 @@ def delete(request,post_id):
     # User 정보 받아올 수 있을때 사용
     # if detail_post.author == request.user:
     #     detail_post.delete()
-    return redirect('index')
+    return redirect('post')
     
 def create_comment(request,post_id):
     if request.method=="POST":

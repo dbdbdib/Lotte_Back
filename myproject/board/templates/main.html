@@ -2,31 +2,38 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIKELION X lotte 메인화면</title>
 </head>
+
 <body>
     로그인
-    <a href="{% url 'signup' %}">회원가입</a> 
+    <a href="{% url 'signup' %}">회원가입</a>
     마이페이지
-    
+
     <div class="food">
         <a href="{% url 'food' %}">식품</a>
     </div>
-    
+
     <div class="retail">
         <a href="{% url 'retail' %}">유통</a>
     </div>
-        
+
     <div class="chem-const-manufac">
         <a href="{% url 'chem' %}">화학/건설/제조</a>
     </div>
-    
+
     <div class="tour-service-finance">
         <a href="{% url 'tour' %}">관광/서비스/금융</a>
     </div>
+
+    <div>
+        <a href="{% url 'post' %}">게시판</a>
+    </div>
 </body>
 </body>
+
 </html>
