@@ -7,6 +7,11 @@
 {{one_post}}
 <br>
 {{one_post.desc}}
+<br>
+{% if one_post.image %}
+<img src="{{ one_post.image.url }}" alt="alter">
+이미지
+{% endif %}
 <a href="{% url 'detail' one_post.id %}">detail</a> <br>
 <hr>
 {%endfor%}
