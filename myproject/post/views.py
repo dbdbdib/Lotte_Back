@@ -18,20 +18,13 @@ def create(request):
     context = dict()
 
     if request.method == 'POST':
-        temp_form = PostForms(request.POST)
+        # media 파일 올려주려면, request.FILES 추가해주어야한다.
+        temp_form = PostForms(request.POST, request.FILES)
+        # temp_form.photo = request.FILES['image']
+
         if temp_form.is_valid():
             clean_form = temp_form.save()
             # 추후에 User.id 할당해야해
-
-            # for img in request.FILES.getlist('imgs'):
-            #      # Photo 객체를 하나 생성한다.
-            #     photo = Photo()
-            # # 외래키로 현재 생성한 Post의 기본키를 참조한다.
-            #     photo.post = clean_form
-            # # imgs로부터 가져온 이미지 파일 하나를 저장한다.
-            #     photo.image = img
-            # # 데이터베이스에 저장
-            #     clean_form = photo.save()
             clean_form.save()
             return redirect('post')
         else:

@@ -1,10 +1,11 @@
 <form method="post" action="{% url 'signup' %}">
     {% csrf_token %}
+
     {% for i in form %}
     <div>
-    {{i.label}}
-    {{i}}
-    {{i.errors}}
+        {{i.label}}
+        {{i}}
+        {{i.errors}}
     </div>
     {% endfor %}
 

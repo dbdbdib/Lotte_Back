@@ -1,8 +1,41 @@
-<h1>글쓰기 PAGE</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-<form method="POST">
-    {% csrf_token %}
-    {{write_form.as_p}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href='{% static "css/write.css" %}' type="text/css" />
+</head>
 
-    <button type="submit">작성</button>
-</form>
+<body>
+    <div class="container">
+        <div class="nav_bar">
+            <!-- <img src="../img/logo.png" class="logo"> -->
+        </div>
+
+        <div class="post-container">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="post-head">
+                    <div class="post-title"> {{write_form.title}}
+                    </div>
+                </div>
+                <div class="post-content"> {{write_form.desc}}
+                </div>
+                <div class="btn-wrap">
+                    <div class="btn--left">
+                        <button class="btn"> {{write_form.image}}
+                        </button>
+                    </div>
+                    <div class="btn--right">
+                        <button class="btn">작성 완료</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

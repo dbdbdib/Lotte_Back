@@ -5,8 +5,9 @@
 {{detail_post.author}} <br>
 {{detail_post.desc}} <br>
 {{detail_post.create_at}} <br>
+{% if detail_post.image%}
 <img src="{{detail_post.image.url}}" alt=""><br>
-
+{% endif %}
 
 <a href="{% url 'update' detail_post.id %}">수정</a>
 <a href="{% url 'delete' detail_post.id%}">삭제</a>
