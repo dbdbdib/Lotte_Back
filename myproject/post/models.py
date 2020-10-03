@@ -2,11 +2,14 @@
 # Create your models here.
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 
 # Create your models here.
 class Post(models.Model):
+    # author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,null=True,related_name="author_user" )
     title = models.CharField('제목', max_length=100)
     desc = models.TextField('내용')
+    # scrap  = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="scrap_user")
     create_at = models.DateTimeField('작성시간', default = timezone.now)
     image = models.ImageField('사진',upload_to='images/', blank=True, null=True)
     def __str__(self):

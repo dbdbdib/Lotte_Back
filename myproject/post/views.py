@@ -19,6 +19,9 @@ def create(request):
 
     if request.method == 'POST':
         temp_form = PostForms(request.POST)
+        temp_form.photo = request.FILES['image']
+        print(temp_form.photo)
+
         if temp_form.is_valid():
             clean_form = temp_form.save()
             # 추후에 User.id 할당해야해
