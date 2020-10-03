@@ -1,1 +1,7 @@
-성공성공!!
+{%if user.is_active%}
+    회원가입 성공. ㅊㅋ
+{%else%}
+    메일보냈으니 확인 ㅂㅌ
+{%endif%}
+
+<a href="{% url 'mainpage' %}">메인페이지 가기</a>

@@ -132,3 +132,16 @@ AUTH_USER_MODEL = "account.User"
 # 로그인, 로그아웃 시 REDIRECT 경로 (mainpage)
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# 토큰 유효기간
+PASSWORD_RESET_TIMEOUT_DAYS = 1
+
+# 이메일 관련 설정
+from myproject import my_settings
+EMAIL_BACKEND = my_settings.EMAIL['EMAIL_BACKEND']
+EMAIL_USE_TLS = my_settings.EMAIL['EMAIL_USE_TLS']
+EMAIL_PORT = my_settings.EMAIL['EMAIL_PORT']
+EMAIL_HOST = my_settings.EMAIL['EMAIL_HOST']
+EMAIL_HOST_USER = my_settings.EMAIL['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = my_settings.EMAIL['EMAIL_HOST_PASSWORD']
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

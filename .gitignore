@@ -2,9 +2,14 @@
 *~
 __pycache__
 myvenv
+dbdbvenv
 db.sqlite3
+FETCH_HEAD
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py
 /static
 .DS_Store
+migrations
+myproject/myproject/my_settings.py
+/media
