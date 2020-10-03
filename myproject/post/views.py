@@ -18,6 +18,7 @@ def create(request):
     context = dict()
 
     if request.method == 'POST':
+        # media 파일 올려주려면, request.FILES 추가해주어야한다.
         temp_form = PostForms(request.POST, request.FILES)
         # temp_form.photo = request.FILES['image']
 
