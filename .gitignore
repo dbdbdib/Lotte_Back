@@ -12,4 +12,3 @@ FETCH_HEAD
 .DS_Store
 migrations
 /static/admin
-.static_root/
