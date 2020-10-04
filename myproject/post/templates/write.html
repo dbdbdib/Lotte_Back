@@ -19,15 +19,19 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <div class="post-head">
-                    {{write_form.title}}
-                    <!-- <div class="post-title"> 
+                <!-- <div class="post-head"> -->
+                {{write_form.title}}
+                <!-- <div class="post-title"> 
                     </div> -->
-                </div>
-                <div class="post-content"> {{write_form.desc}}
-                </div>
+                <!-- </div> -->
+                <!-- <div class="post-content">  -->
+                {{write_form.desc}}
+                <!-- </div> -->
+
+
                 <div class="btn-wrap">
                     <div class="btn--left">
+                        <label for="id_image">파일</label>
                         {{write_form.image}}
 
                         <!-- <button class="btn">
