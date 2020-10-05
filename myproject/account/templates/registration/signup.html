@@ -1,0 +1,19 @@
+<form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    {% for i in form %}
+    <div>
+        {{i.label}}
+        {{i}}
+    </div>
+    {% endfor %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <button type="submit">회원가입</button>
+</form>

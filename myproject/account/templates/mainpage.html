@@ -1,0 +1,9 @@
+메인페이지
+
+{%if user.is_authenticated%}
+    {{user.nickname}} 님 ㅎㅇ
+    <a href="{% url 'mypage' user.pk %}">마이페이지</a>
+    <a href="{% url 'logout' %}">로그아웃</a>
+{%else%}
+    <a href="{% url 'signin' %}">로그인</a>
+{%endif%}
