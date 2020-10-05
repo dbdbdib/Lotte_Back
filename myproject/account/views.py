@@ -25,10 +25,6 @@ from .models import User
 class SignUpView(CreateView): # 회원가입 기본 뷰 상속
     template_name = 'registration/signup.html'
     form_class = SignUpForm # 폼은 SignUpForm 사용
-<<<<<<< HEAD
-=======
-    success_url = reverse_lazy('success_signup') # reverse_laze : 해당 url로 실행
->>>>>>> 464f568c4fa98a654d48de8e4e8bdea8c3f6c465
 
     def get_success_url(self):
         return reverse_lazy('mainpage') # reverse_laze : 해당 url로 실행
@@ -38,7 +34,6 @@ class SignUpView(CreateView): # 회원가입 기본 뷰 상속
         auth.login(self.request, user) # 자동 로그인
         return super().form_valid(form)
 
-<<<<<<< HEAD
     def form_invalid(self, form):
         messages.error(self.request, form.non_field_errors(), extra_tags='danger')
         return super().form_invalid(form)
@@ -115,18 +110,6 @@ class SignInView(LoginView):
         messages.error(self.request, '로그인에 실패하였습니다. ID 또는 Password를 확인해 주세요.', extra_tags='danger')
         return super().form_invalid(form)
 
-# 메인페이지 뷰
-class MainPageView(TemplateView):
-    template_name = 'mainpage.html'
-    
-    # context 뿌리는 메소드
-    def get_context_data(self, **kwargs):
-        # context = super().get_context_data(**kwargs) # pk, view 포함
-
-        user = self.request.user
-        context = {'user': user}
-        return context
-
 
 
 # 마이페이지 뷰
@@ -142,8 +125,3 @@ class MyPageView(TemplateView):
 
         context = {'user': user, 'pk': pk}
         return context
-=======
-# 회원가입 성공 뷰
-class SuccessSignUpView(TemplateView):
-    template_name = 'success_signup.html'
->>>>>>> 464f568c4fa98a654d48de8e4e8bdea8c3f6c465
