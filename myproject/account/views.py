@@ -25,6 +25,10 @@ from .models import User
 class SignUpView(CreateView): # 회원가입 기본 뷰 상속
     template_name = 'registration/signup.html'
     form_class = SignUpForm # 폼은 SignUpForm 사용
+<<<<<<< HEAD
+=======
+    success_url = reverse_lazy('success_signup') # reverse_laze : 해당 url로 실행
+>>>>>>> 464f568c4fa98a654d48de8e4e8bdea8c3f6c465
 
     def get_success_url(self):
         return reverse_lazy('mainpage') # reverse_laze : 해당 url로 실행
@@ -34,6 +38,7 @@ class SignUpView(CreateView): # 회원가입 기본 뷰 상속
         auth.login(self.request, user) # 자동 로그인
         return super().form_valid(form)
 
+<<<<<<< HEAD
     def form_invalid(self, form):
         messages.error(self.request, form.non_field_errors(), extra_tags='danger')
         return super().form_invalid(form)
@@ -137,3 +142,8 @@ class MyPageView(TemplateView):
 
         context = {'user': user, 'pk': pk}
         return context
+=======
+# 회원가입 성공 뷰
+class SuccessSignUpView(TemplateView):
+    template_name = 'success_signup.html'
+>>>>>>> 464f568c4fa98a654d48de8e4e8bdea8c3f6c465

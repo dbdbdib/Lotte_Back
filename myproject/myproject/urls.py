@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+<<<<<<< HEAD
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
@@ -30,3 +31,24 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('mypage/<int:pk>/', MyPageView.as_view(), name='mypage'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) # 이미지 올릴 때 필요
+=======
+from django.urls import path, include
+from account.views import SignUpView, SuccessSignUpView
+from board.views import main, food, chem, retail, tour
+
+# for Media file전달
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('signup/', SignUpView.as_view(), name='signup'), # name 넣는 것 필수 (안 하면 오류나더라)
+    path('success_signup/', SuccessSignUpView.as_view(), name='success_signup'),
+    path('', main, name='main'),
+    path('food/', food, name='food'),
+    path('retail/', retail, name='retail'),
+    path('chem/', chem, name='chem'),
+    path('tour/', tour, name='tour'),
+    path('', include('post.urls'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> 464f568c4fa98a654d48de8e4e8bdea8c3f6c465

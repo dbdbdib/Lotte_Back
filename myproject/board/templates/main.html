@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIKELION X lotte 메인화면</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+    <!-- 로그인
+    마이페이지 -->
+
+    <!-- <div>
+        <a href="{% url 'post' %}">게시판</a>
+    </div> -->
+
+    <div class="background">
+        <div class="header">
+            <div class="empty_div"></div>
+            <img src="../img/logo.png" class="logo">
+            <div class="user-interaction-wrap">
+                <div class="login-in"><a href="">로그인</a></div>
+                <div class="sign-in"><a href="{% url 'signup' %}">회원 가입</a></div>
+            </div>
+        </div>
+
+        <!-- 요기서 안에 글씨랑 로고 넣으려고 하면 계속 앞에 친구가 붕뜨면서 이쁘게 안나옴 -->
+        <div class="content-box">
+            <div class="top-box">
+                <div class="select-box" id="select-food">
+                    <!-- <div class="logo-box">
+                                <img src="../img/logo2.png" class="logo2">
+                            </div> -->
+                    <div class="box-text">
+                        <a href="{% url 'food' %}">식품</a>
+                    </div>
+                </div>
+                <div class="select-box" id="select-trans">
+                    <a href="{% url 'retail' %}">유통</a>
+                </div>
+            </div>
+            <div class="bottom-box">
+                <div class="select-box" id="select-bio">
+                    <a href="{% url 'chem' %}">화학/건설/제조</a>
+                </div>
+                <div class="select-box" id="select-ser">
+                    <a href="{% url 'tour' %}">관광/서비스/금융</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <div id="footer-nav"></div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
+
+</html>
+
+</html>

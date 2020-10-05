@@ -11,5 +11,8 @@ FETCH_HEAD
 /static
 .DS_Store
 migrations
+<<<<<<< HEAD
 myproject/myproject/my_settings.py
 /media
+=======
+>>>>>>> 464f568c4fa98a654d48de8e4e8bdea8c3f6c465
