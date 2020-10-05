@@ -5,27 +5,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/board.css' %}">
+    <link rel="stylesheet" href="{% static 'css/board_list.css' %}">
     <title>LIKELION X lotte 화학/건설/제조</title>
 </head>
 <body>
-    <div class="body-container">
-        <div class="left-container">
-            <ul>롯데엠시시</ul>
-            <ul>롯데건설</ul>
-            <ul>롯데CM사업본부</ul>
-            <ul>롯데기공</ul>
-            <ul>롯데알미늄</ul>
-            <ul>롯데정밀화학</ul>
-            <ul>롯데케미칼</ul>
-            <ul>롯데비피화학</ul>
-            <ul>캐논코리아 비즈니스 솔루션</ul>
-            <ul>케이피켐텍</ul>
-            <ul>한국후지필름</ul>
+    <div class = "background">
+        <div class= "header">
+            <div class="mainpage-btn">
+                메인페이지
+            </div>
+            <img src="../img/logo.png" class="logo">
+            <div class="mypage-btn">
+                마이페이지
+            </div>
         </div>
 
-        <div class="right-container">
-            
+        <div class="board-wrap">
+            <div class="comp-wrap">
+                <div class="comp-title">
+                    회사 목록
+                </div>
+                <div class="comp-list">
+                    <!-- 요기는 나중에 데이터 넣으면 for 문으로 돌아가게 하면 될 듯 -->
+                    <!-- 일단 수작업으로 넣어놨음!^^ -->
+                    <div class="comp-box">
+                        <div class="comp-name" id="name1">
+                            롯데엠시시
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name2">
+                            롯데건설
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name3">
+                            롯데CM사업본부
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name4">
+                            롯데기공
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name5">
+                            롯데알미늄
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name6">
+                            롯데정밀화학
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name7">
+                            롯데케미칼
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name8">
+                            롯데비피화학
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name9">
+                            캐논코리아 비즈니스솔루션
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name10">
+                            케이피켐텍
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name11">
+                            한국후지필름
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-wrap">
+                <div class="post-title">
+                    제목 | 게시 날짜 | 조회 | 스크랩 | 댓글
+                </div>
+                <div class="post-box-wrap">
+                    <div class="post-box">
+                        <div class="post" id="post1">
+                            주모! 샷다내려잇! 나 오늘 집안가!
+                            | 20.10.01 | 9 | 1 | 3
+                        </div>
+                    </div>
+                    <div class="post-box">  
+                        <div class="post" id="post2">
+                            벌써 10월 1일입니다... | 20.10.01 | 8 | 0 | 12
+                        </div>
+                    </div>
+                    <div class="post-box">    
+                        <div class="post" id="post1">
+                            추석 잘 보내세영 히히 | 20.10.01 | 6 | 0 | 30
+                        </div>
+                    </div>
+                </div>
+                <div class="create-btn">
+                    <div class="btn-text">
+                        게시글 작성
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div id="footer"> 
+        <div id="footer-nav">
+            <div class="container"></div>
+        </div>
+        <div id="footer-info">
+            <div class="footer-info-text">
+                Copyright © DOOBOO All Rights reserved.
+            </div>
         </div>
     </div>
 </body>
