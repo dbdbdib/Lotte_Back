@@ -27,7 +27,7 @@ class SignUpView(CreateView): # 회원가입 기본 뷰 상속
     form_class = SignUpForm # 폼은 SignUpForm 사용
 
     def get_success_url(self):
-        return reverse_lazy('mainpage') # reverse_laze : 해당 url로 실행
+        return reverse_lazy('success_signup') # reverse_laze : 해당 url로 실행
 
     def form_valid(self, form):
         user = form.save() # 폼 저장할 때 return한 user 가져와서 저장
@@ -60,7 +60,7 @@ class IncumbentSignUpView(CreateView):
         )
         email.send()
 
-        return reverse_lazy('mainpage') # reverse_laze : 해당 url로 실행
+        return reverse_lazy('success_signup') # reverse_laze : 해당 url로 실행
 
     def form_valid(self, form):
         self.user = form.save() # 폼 저장할 때 return한 user 가져와서 저장
