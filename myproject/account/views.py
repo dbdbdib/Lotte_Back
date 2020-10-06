@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.shortcuts import resolve_url
-from django.views.generic.edit import CreateView
+from django.shortcuts import resolve_url, get_object_or_404
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
@@ -16,34 +16,23 @@ from django.http import JsonResponse
 from django.core.exceptions import ValidationError
 from .token import account_activation_token
 from .text import message
-from .forms import SignUpForm, IncumbentSignUpForm, SignInForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from .forms import SignUpForm, IncumbentSignUpForm, SignInForm, UserUpdateForm, PasswordUpdateForm
 from .models import User
 
 # Create your views here.
+
+# 회원가입 구분 선택 뷰
+class SelectDivisionView(TemplateView):
+    template_name = 'registration/select_division.html'
+
+
 
 # 회원가입 뷰
 class SignUpView(CreateView): # 회원가입 기본 뷰 상속
     template_name = 'registration/signup.html'
     form_class = SignUpForm # 폼은 SignUpForm 사용
-
-    def get_success_url(self):
-        return reverse_lazy('success_signup') # reverse_laze : 해당 url로 실행
-
-    def form_valid(self, form):
-        user = form.save() # 폼 저장할 때 return한 user 가져와서 저장
-        auth.login(self.request, user) # 자동 로그인
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, form.non_field_errors(), extra_tags='danger')
-        return super().form_invalid(form)
-
-
-
-# 현직자 회원가입 뷰
-class IncumbentSignUpView(CreateView):
-    template_name = 'registration/incumbent_signup.html'
-    form_class = IncumbentSignUpForm # 폼은 IncumbentSignUpForm 사용
     user = None
 
     def get_success_url(self):
@@ -63,12 +52,25 @@ class IncumbentSignUpView(CreateView):
         return reverse_lazy('success_signup') # reverse_laze : 해당 url로 실행
 
     def form_valid(self, form):
-        self.user = form.save() # 폼 저장할 때 return한 user 가져와서 저장
+        self.user = form.save() # 폼 저장할 때 return한 user 가져와서 저장해두기
         return super().form_valid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, form.non_field_errors(), extra_tags='danger')
         return super().form_invalid(form)
+
+
+
+# 현직자 회원가입 뷰
+class IncumbentSignUpView(SignUpView):
+    template_name = 'registration/incumbent_signup.html'
+    form_class = IncumbentSignUpForm # 폼은 IncumbentSignUpForm 사용
+
+
+
+# 회원가입 입력 완료 뷰
+class SuccessSignUpView(TemplateView):
+    template_name = 'registration/success_signup.html'
 
 
 
@@ -84,7 +86,7 @@ class ActivateView(TemplateView):
             if account_activation_token.check_token(user, token): # 동일하면
                 user.is_active = True # active로 변경
                 user.save() # 저장
-                auth.login(request, user)
+                auth.login(request, user) # 자동 로그인
 
                 return super(ActivateView, self).get(request, uidb64, token)
 
@@ -113,15 +115,33 @@ class SignInView(LoginView):
 
 
 # 마이페이지 뷰
-class MyPageView(TemplateView):
-    template_name = 'mypage.html'
-    pk_url_kwargs = 'pk' # path로부터 전달받을 pk 키워드 이름
+def mypage_update(request, pk):
 
-    def get_context_data(self, **kwargs):
-        # context = super().get_context_data(**kwargs) # pk, view 포함
+    if request.method == "POST":
 
-        user = self.request.user
-        pk = self.kwargs.get(self.pk_url_kwargs)
+        # 비번 수정 폼
+        passwordform = PasswordUpdateForm(request.user, request.POST)
+        if passwordform.is_valid():  # 비번 수정 폼
+            user = passwordform.save()
+            update_session_auth_hash(request, user)  # 암호화하여 업뎃
+        else:
+            messages.error(request, '비밀번호는 변경되지 않았습니다.') # 닉네임 중복확인
 
-        context = {'user': user, 'pk': pk}
-        return context
+        # 프로필 수정 폼
+        profileform = UserUpdateForm(request.POST, request.FILES, instance=request.user) # 프로필 수정 폼
+  
+        if profileform.is_valid():
+            profileform.save()
+            print(profileform.cleaned_data.get('picture'))
+            messages.success(request, '회원 정보가 변경되었습니다.')
+        else:
+            messages.error(request, '이미 존재하는 닉네임입니다.') # 닉네임 중복확인
+
+        return redirect('/mypage/{}'.format(pk))
+    else:
+        profileform = UserUpdateForm(instance=request.user)
+        passwordform = PasswordUpdateForm(request.user)
+
+    context = {'profileform':profileform, 'passwordform':passwordform, 'user': request.user, 'pk':pk}
+
+    return render(request,'mypage.html', context)
