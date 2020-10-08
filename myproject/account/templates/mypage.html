@@ -1,55 +1,12 @@
 마이페이지
 {%if user.pk is pk %}
-
     {{user.nickname}} 님 ㅎㅇ
     이메일은 {{user.email}}
     구분은 {{user.get_division_display}}
-
-    {%if user.division is 1%}
     계열은 {{user.get_line_display}}
-    {%endif%}
-
     프로필사진 <img src="{{user.picture.url}}" alt='프로필사진'>
-
-
-    
-    <form method="post" action="{% url 'mypage' user.pk %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for i in profileform %}
-        <div>
-            {{i.label}}
-            {{i}}
-        </div>
-        {% endfor %}
-    
-        {% for i in passwordform %}
-        <div>
-            {{i.label}}
-            {{i}}
-        </div>
-        {% endfor %}
-
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    
-        <button type="submit">정보 수정</button>
-    </form>
-
-
-
-
     <a href="{% url 'logout' %}">로그아웃</a>
     <a href="{% url 'mainpage' %}">메인페이지 가기</a>
-
-
-
-
 {% else %}
-    딴 사람 마이페이지니까 볼 수 없움 ~~ 에러
-    <a href="{% url 'mainpage' %}">메인페이지 가기</a>
+    딴 사람 마이페이지니까 볼 수 없움 ~~
 {% endif %}

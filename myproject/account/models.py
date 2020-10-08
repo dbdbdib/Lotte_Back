@@ -72,9 +72,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     # 필드 정의
     email = models.EmailField('이메일', unique=True)
     nickname = models.CharField('닉네임', max_length=20, unique=True)
-    picture = models.ImageField('프로필 사진', null=True, default="./images/userdefaultimg.png")
+    picture = models.ImageField('프로필 사진', null=True, default="./static/img/userdefaultimg.png")
     division = models.IntegerField('가입 구분', choices = DIVISION_CHOICES)
-    line = models.IntegerField('계열', choices = LINE_CHOICES, null=True, blank=True)
+    line = models.IntegerField('계열', choices = LINE_CHOICES, null=True)
     is_staff = models.BooleanField('staff',default=False) # is_staff는 넣어야 함 (is_superuser는 이미 있어서 O)
     is_active = models.BooleanField('active', default=True) # is_staff는 넣어야 함 (is_superuser는 이미 있어서 O)
 

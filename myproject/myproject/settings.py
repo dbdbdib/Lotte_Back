@@ -122,10 +122,10 @@ USE_TZ = True
 
 # static 경로 설정
 # STATIC_URL = '/static/' # 각 static 파일에 대한 URL
-STATIC_ROOT = os.path.join(BASE_DIR, 'static') # 업로드된 파일 저장 디렉토리 경로
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static') # 업로드된 파일 저장 디렉토리 경로
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 STATIC_URL = '/static/'
 
 # 미디어 파일 경로 설정

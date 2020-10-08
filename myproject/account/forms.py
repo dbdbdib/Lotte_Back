@@ -4,8 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from django.contrib.auth import password_validation
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
 
 
 # 일반 회원가입 폼
@@ -53,7 +51,7 @@ class SignUpForm(UserCreationForm): # 회원가입 기본 폼 상속 (패스워�
         password2 = self.cleaned_data.get('password2')
         nickname = self.cleaned_data.get('nickname')
 
-        # 이메일 확인 - 이 부분 끌어서 중복확인 기능 만들 것
+        # 이메일 확인
         try:
             User.objects.get(email=email)
             raise forms.ValidationError("이미 존재하는 이메일입니다.") # 존재하는 경우
@@ -71,7 +69,7 @@ class SignUpForm(UserCreationForm): # 회원가입 기본 폼 상속 (패스워�
             raise forms.ValidationError("비밀번호가 일치하지 않습니다.")
 
 
-        # 닉네임 확인 - 이 부분 끌어서 중복확인 기능 만들 것
+        # 닉네임 확인
         if len(self.cleaned_data.get('nickname')) >= 20:
             raise forms.ValidationError('닉네임이 20자 이상입니다. 20자 미만으로 입력하세요.')
         try:
@@ -91,7 +89,6 @@ class SignUpForm(UserCreationForm): # 회원가입 기본 폼 상속 (패스워�
         user.nickname = self.cleaned_data['nickname']
         user.picture = self.cleaned_data['picture']
         user.division = 0
-        user.is_active = False
 
         if commit:
             user.save() # User 생성
@@ -120,13 +117,12 @@ class IncumbentSignUpForm(SignUpForm): # 일반 회원가입 폼 상속
         super(IncumbentSignUpForm, self).clean(*args, **kwargs)
 
         email = self.cleaned_data.get('email')
-        line = self.cleaned_data.get('line')
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        nickname = self.cleaned_data.get('nickname')
 
-        if email.split('@')[1] != 'naver.com': # 이메일의 @ 뒷부분 (추후 변경)
+        if self.cleaned_data.get('email').split('@')[1] != 'naver.com': # 이메일의 @ 뒷부분
             raise forms.ValidationError('롯데 이메일 계정이 아닙니다.') # forms.ValidationError 보내면, views의 form_invalid()에서 form.non_field_errors()로
-        if line is None:
-            raise forms.ValidationError('계열을 입력하세요.') # forms.ValidationError 보내면, views의 form_invalid()에서 form.non_field_errors()로
-
 
         return self.cleaned_data
     
@@ -143,9 +139,6 @@ class IncumbentSignUpForm(SignUpForm): # 일반 회원가입 폼 상속
             user.save() # User 생성
         return user
 
-
-
-
 # 로그인 폼
 class SignInForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -153,64 +146,3 @@ class SignInForm(AuthenticationForm):
 
         # 아이디 대신 이메일을 username으로
         UserModel = User
-
-
-
-class UserUpdateForm(forms.ModelForm):
-
-    # nickname = forms.CharField(
-    #     label='닉네임',
-    #     widget=forms.TextInput(attrs={}),
-    #     required=True,
-    # )
-
-    # picture = forms.ImageField(
-    #     label='프로필 사진',
-    #     widget=forms.TextInput(attrs={}),
-    #     required=False,
-    # )
-
-
-    def __init__(self, *args, **kwargs):
-        super(UserUpdateForm, self).__init__(*args, **kwargs)
-
-        self.fields['nickname'].widget.attrs.update(
-            {'placeholder': '닉네임',
-             'class': "pf_item",
-             'id': "pf_phone"})
-
-        self.fields['picture'].widget.attrs.update(
-            {'placeholder': '프로필 사진',
-            'class':'pf_item',
-             'id': "pf_gender",})
-
-    class Meta:
-        model = User
-        fields = ['nickname', 'picture',]
-
-class PasswordUpdateForm(PasswordChangeForm):
-    # 필드
-    old_password = forms.CharField(
-        label='기존 비밀번호',
-        strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True}),
-        required=False
-    )
-    new_password1 = forms.CharField(
-        label='새 비밀번호',
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-        strip=False,
-        help_text=password_validation.password_validators_help_text_html(),
-        required=False
-    )
-    new_password2 = forms.CharField(
-        label='새 비밀번호 확인',
-        strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-        required=False
-    )
-
-    # # 에러메시지
-    # error_messages = {
-    #     'password_mismatch': '비밀번호가 다릅니다.',
-    # }
