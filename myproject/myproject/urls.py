@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
-from account.views import SignUpView, IncumbentSignUpView, ActivateView, SignInView, MyPageView
+from account.views import SelectDivisionView, SignUpView, IncumbentSignUpView, SuccessSignUpView, ActivateView, SignInView, mypage_update
 from board.views import MainPageView, food, chem, retail, tour
 
 # for Media file전달
@@ -26,12 +26,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPageView.as_view(), name='mainpage'),
+    path('select_division', SelectDivisionView.as_view(), name='select_division'),
     path('signup/', SignUpView.as_view(), name='signup'),
     path('incumbent_signup/', IncumbentSignUpView.as_view(), name='incumbent_signup'),
+    path('success_signup/', SuccessSignUpView.as_view(), name='success_signup'),
     path('account/activate/<str:uidb64>/<str:token>', ActivateView.as_view(), name='activate'),
     path('signin/', SignInView.as_view(), name='signin'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('mypage/<int:pk>/', MyPageView.as_view(), name='mypage'),
+    path('mypage/<int:pk>/', mypage_update, name='mypage'),
     path('food/', food, name='food'),
     path('retail/', retail, name='retail'),
     path('chem/', chem, name='chem'),
