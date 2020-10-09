@@ -27,8 +27,6 @@ from .models import User
 class SelectDivisionView(TemplateView):
     template_name = 'registration/select_division.html'
 
-
-
 # 회원가입 뷰
 class SignUpView(CreateView): # 회원가입 기본 뷰 상속
     template_name = 'registration/signup.html'

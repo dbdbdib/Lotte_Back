@@ -1,6 +1,18 @@
+{%if user.is_authenticated%}
+{{user.nickname}} 님 ㅎㅇ
+<a href="{% url 'mypage' user.pk %}">마이페이지</a>
+<a href="{% url 'logout' %}">로그아웃</a>
+{%else%}
+<a href="{% url 'signin' %}">로그인</a>
+<a href="{% url 'select_division' %}">회원가입</a>
+{%endif%}
+
+
 <div class="cnt_post">{{all_post|length}}개의 게시글</div>
 
 <a class="write_btn" href="{% url 'create' %}">글쓰기</a>
+
+
 
 {% for one_post in all_post%}
 <br>
@@ -10,7 +22,7 @@
 <br>
 {% if one_post.image %}
 <img src="{{ one_post.image.url }}" alt="alter">
-이미지
+
 {% endif %}
 <a href="{% url 'detail' one_post.id %}">detail</a> <br>
 <hr>
