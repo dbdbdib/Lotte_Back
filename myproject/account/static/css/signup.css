@@ -1,0 +1,192 @@
+/* 취준생 */
+/* setting */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    /* size */
+    width: 100%;
+    /* design */
+    background: #FFFFFF;
+    /* position */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ----------------------------------header start---------------------------------- */
+.header {/* 헤더 전체 */
+    /* position */
+    margin-top: 66px;
+    margin-bottom: 55px;
+}
+
+.logo {/* 롯데 로고 */
+    /* position */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    display: block;
+    justify-content: center;
+    /* size */
+    width: 113px;
+    height: 113px;
+}
+
+#team-introduction {/* 두부두부 콜라보 이미지 */
+    /* size */
+    width: 724px;
+    height: 92px;
+}
+
+.dot--medium {/* 글자 옆 dot */
+    /* size */
+    width: 15px;
+    height: 15px;
+    /* design */
+    background:#da291c;
+    border-radius: 3px;
+    transform: rotate(45deg);
+    /* position */
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.process {/* '회원가입'글자 + dot 담아주는 div*/
+    /* size */
+    width: 1200px;
+    /* position */
+    margin-bottom: 40px;
+}
+
+.signin-process {/* 회원가입 과정 이미지 */
+    /* size */
+    width: 1000px;
+    /* position */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+
+#signin { /* '회원가입'글자 */
+    /* position */
+    margin-right: auto;
+    margin-bottom: 20px;
+    /* font */
+    font-size: 55px;
+    font-weight: bold;
+}
+
+/* ----------------------------------header end---------------------------------- */
+
+.sub-text{/* '정보 입력'글자 */
+    /* position */
+    padding-top: 30px;
+    padding-bottom: 15px;
+    margin-left: 20%;
+    margin-right: auto;
+    /* font */
+    text-align: left;
+    font: normal normal bold 50px/55px Apple SD Gothic Neo;
+    letter-spacing: 0px;
+    color: #333333;
+}
+
+.user-input-area:first-child {
+    /* position */
+    margin-bottom: 18px;
+}
+
+.user-input-area input{
+    /* size */
+    width: 395px;
+    height: 44px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    margin-bottom: 15px;/* 아래 입력칸과의 간격 */
+
+    /* design */
+    border: 1px solid #707070;
+    border-radius: 10px;
+
+    /* font */
+    font-size: 15px;
+}
+
+.input-type{/*정보입력 항목 네이밍*/
+    margin-right: 10px;
+    display: inline-block;
+    font: normal normal medium 22px/38px Apple SD Gothic Neo;
+    letter-spacing: 0px;
+    color: #222222;
+}
+
+.finish-btn{/* 회원가입 버튼 */
+    /* position */
+    position: absolute; left: 40%;
+    margin-top: 50px;
+    font-size: 30px;
+    color: rgb(138, 138, 138);
+    width: 300px;
+    height: 90px;
+
+    /* style */
+    background: white 0% 0% no-repeat padding-box;
+    border: 1px solid #B7B7B7;
+    border-radius: 13px;
+}
+
+.finish-btn:hover{/* 회원가입 버튼 hover */
+    color: white;
+    background: #222222 0% 0% no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 13px;
+    cursor: pointer;
+}
+
+.input-btn {/* 닉중복확인 버튼*/
+    width: 100px;
+    height: 42px;
+    padding-top: auto;
+    padding-bottom: auto;
+    background: #222222 0% 0% no-repeat padding-box;
+    border: 1px solid #222222;
+    border-radius: 11px;
+    color: white;
+    font-size: 15px;
+}
+
+/* ----------------------------------under all : footer---------------------------------- */
+footer {
+    /* position */
+    margin-top: 250px;
+    /* size */
+    width: 100%;
+    height: 259px;
+    background: #55585A 0% 0% no-repeat padding-box;
+}
+
+#footer-nav {
+    /* size */
+    height: 187px;
+}
+
+#footer-info {
+    /* design */
+    border-top: 1px solid black;
+    /* size */
+    height: 72px;
+}
+
+.footer-info-text {
+    /* position */
+    margin-top: 16px;
+    margin-left: 50px;
+    /* font */
+    font-size: 15px;
+    color: #FFFFFF;
+    opacity: 1;
+}

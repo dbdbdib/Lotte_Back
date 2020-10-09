@@ -9,40 +9,7 @@ from django.contrib.auth import update_session_auth_hash
 
 
 # 일반 회원가입 폼
-class SignUpForm(UserCreationForm): # 회원가입 기본 폼 상속 (패스워드, 패스워드확인)        
-    # 필드
-    def __init__(self, *args, **kwargs):
-        super(SignUpForm, self).__init__(*args, **kwargs)        
-
-        self.fields['email'].widget.attrs.update(
-            {'placeholder': '이메일',
-            'class': "pf_item",
-             'id': "pf_name"})
-
-        self.fields['password1'].label = '비밀번호' # 라벨 수정
-        self.fields['password1'].widget.attrs.update(
-            {'label-name': '비밀번호',
-            'placeholder': '비밀번호',
-            'class': "pf_item",
-             'id': "pf_nickname"})
-
-        self.fields['password2'].label = '비밀번호 확인' # 라벨 수정
-        self.fields['password2'].widget.attrs.update(
-            {'placeholder': '비밀번호 확인',
-            'class':'pf_item',
-             'id': "pf_birth"})
-        self.fields['password2'].help_text = "" # 부모 UserCreationForm의 help_text 출력 X
-
-        self.fields['nickname'].widget.attrs.update(
-            {'placeholder': '닉네임',
-             'class': "pf_item",
-             'id': "pf_phone"})
-
-        self.fields['picture'].widget.attrs.update(
-            {'placeholder': '프로필 사진',
-            'class':'pf_item',
-             'id': "pf_gender",})
-
+class SignUpForm(UserCreationForm): # 회원가입 기본 폼 상속 (패스워드, 패스워드확인)
     class Meta:
         model = User # 모델은 User 사용
         fields = ['email', 'password1', 'password2', 'nickname', 'picture'] # 필드 지정
@@ -72,7 +39,7 @@ class SignUpForm(UserCreationForm): # 회원가입 기본 폼 상속 (패스워�
 
 
         # 닉네임 확인 - 이 부분 끌어서 중복확인 기능 만들 것
-        if len(self.cleaned_data.get('nickname')) >= 20:
+        if len(nickname) >= 20:
             raise forms.ValidationError('닉네임이 20자 이상입니다. 20자 미만으로 입력하세요.')
         try:
             User.objects.get(nickname=nickname)
@@ -102,15 +69,6 @@ class SignUpForm(UserCreationForm): # 회원가입 기본 폼 상속 (패스워�
 
 # 현직자 회원가입 폼
 class IncumbentSignUpForm(SignUpForm): # 일반 회원가입 폼 상속        
-    # 필드
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)        
-
-        self.fields['line'].widget.attrs.update(
-            {'placeholder': '계열 선택',
-            'class':'pf_item',
-             'id': "pf_gender",})
-
     class Meta:
         model = User # 모델은 User 사용
         fields = ['email', 'password1', 'password2', 'nickname', 'picture', 'line'] # 필드 지정
@@ -156,61 +114,36 @@ class SignInForm(AuthenticationForm):
 
 
 
-class UserUpdateForm(forms.ModelForm):
-
-    # nickname = forms.CharField(
-    #     label='닉네임',
-    #     widget=forms.TextInput(attrs={}),
-    #     required=True,
-    # )
-
-    # picture = forms.ImageField(
-    #     label='프로필 사진',
-    #     widget=forms.TextInput(attrs={}),
-    #     required=False,
-    # )
-
-
-    def __init__(self, *args, **kwargs):
-        super(UserUpdateForm, self).__init__(*args, **kwargs)
-
-        self.fields['nickname'].widget.attrs.update(
-            {'placeholder': '닉네임',
-             'class': "pf_item",
-             'id': "pf_phone"})
-
-        self.fields['picture'].widget.attrs.update(
-            {'placeholder': '프로필 사진',
-            'class':'pf_item',
-             'id': "pf_gender",})
-
+# 닉네임 수정 폼
+class NicknameUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['nickname', 'picture',]
+        fields = ['nickname']
 
+
+# 프로필사진 수정 폼
+class PictureUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['picture']
+
+
+# 비밀번호 수정 폼
 class PasswordUpdateForm(PasswordChangeForm):
     # 필드
     old_password = forms.CharField(
         label='기존 비밀번호',
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True}),
-        required=False
     )
     new_password1 = forms.CharField(
         label='새 비밀번호',
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
-        required=False
     )
     new_password2 = forms.CharField(
         label='새 비밀번호 확인',
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-        required=False
     )
-
-    # # 에러메시지
-    # error_messages = {
-    #     'password_mismatch': '비밀번호가 다릅니다.',
-    # }

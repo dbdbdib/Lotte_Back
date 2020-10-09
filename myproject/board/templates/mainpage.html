@@ -1,42 +1,69 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIKELION X lotte 메인화면</title>
+    <title>메인페이지</title>
+    <link rel="stylesheet" href="{% static 'css/mainpage.css' %}">
 </head>
 
 <body>
+    <div class="container">
+        <div class="header">
+            <img src="/media/images/logo.png" class="logo">
+            <div class="user-interaction-wrap">
 
-    {%if user.is_authenticated%}
-    {{user.nickname}} 님 ㅎㅇ
-    <a href="{% url 'mypage' user.pk %}">마이페이지</a>
-    <a href="{% url 'logout' %}">로그아웃</a>
-    {%else%}
-    <a href="{% url 'signin' %}">로그인</a>
-    <a href="{% url 'select_division' %}">회원가입</a>
-    {%endif%}
+                {%if user.is_authenticated%}
+                {{user.nickname}} 님 ㅎㅇ
+                <a href="{% url 'mypage' user.pk %}">마이페이지</a>
+                <a href="{% url 'logout' %}">로그아웃</a>
+                {%else%}
+                <div class="login-in"><a href="{% url 'signin' %}">로그인</a></div>
+                <div class="sign-in"><a href="{% url 'select_division' %}">회원 가입</a></div>
+                {%endif%}
 
-    <div class="food">
-        <a href="{% url 'food' %}">식품</a>
-    </div>
+            </div>
+        </div>
 
-    <div class="retail">
-        <a href="{% url 'retail' %}">유통</a>
-    </div>
-
-    <div class="chem-const-manufac">
-        <a href="{% url 'chem' %}">화학/건설/제조</a>
-    </div>
-
-    <div class="tour-service-finance">
-        <a href="{% url 'tour' %}">관광/서비스/금융</a>
-    </div>
-
-    <div>
-        <a href="{% url 'post' %}">게시판</a>
+        <!-- 요기서 안에 글씨랑 로고 넣으려고 하면 계속 앞에 친구가 붕뜨면서 이쁘게 안나옴 -->
+        <div class="content-box">
+            <a href="{% url 'food' %}">
+                <div class="select-box" id="select--food" onmouseover="mouseOnEvent()">
+                    <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
+                    <div class="business-name">식품</div>
+                </div>
+            </a>
+            <a href="{% url 'retail' %}">
+                <div class="select-box" id="select--distribution">
+                    <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
+                    <div class="business-name">유통</div>
+                </div>
+            </a>
+            <a href="{% url 'chem' %}">
+                <div class="select-box" id="select--chemistry">
+                    <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
+                    <div class="business-name">화학/건설/제조</div>
+                </div>
+            </a>
+            <a href="{% url 'tour' %}">
+                <div class="select-box" id="select--trip">
+                    <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
+                    <div class="business-name">관광/서비스/금융</div>
+                </div>
+            </a>
+        </div>
     </div>
 </body>
+
+<footer>
+    <div id="footer-nav"></div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
 
 </html>

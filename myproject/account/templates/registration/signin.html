@@ -1,21 +1,74 @@
-<form method="post" action="{% url 'signin' %}">
-    {% csrf_token %}
-    {% for i in form %}
-    <div>
-        {{i.label}}
-        {{i}}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class=" header">
+            <a href=""><img src="/media/images/logo.png" class="logo"></a>
+            <div class = "collaboration">
+                <img src="/media/images/lotte_dbdb.png" alt="롯데 X두부두부" id="team-introduction">
+            </div>
+        </div>
+
+        <!-- 로그인 form -->
+        <div class="login-form">
+            <div id="login">로그인<div class="dot--small"></div></div>
+            <form method="post" action="{% url 'signin' %}">
+                {% csrf_token %}
+
+                
+                <div class="user-input-area">
+                    <!-- 아이디 입력 -->
+                    <input type="text" name="username" id="id" autocomplete="off" size="400" placeholder="ID" required>
+                    <label for="id"></label>
+                </div>
+                <div class="user-input-area">
+                    <!-- 패스워드 입력 -->
+                    <input type="password" name="password" id="pw" autocomplete="off" size="25" placeholder="PW" required>
+                    <label for="pw"></label>
+                </div>
+
+                <div class="login-button">
+                    <input type="submit" value="로그인"></button>
+                </div>
+
+            </form>
+
+            <!-- 로그인 실패 시 에러창 뜰 부분 (지금은 메시지로 표시) -->
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div class="caption">
+                <!--회원가입 페이지로 연결될 부분-->
+                아직 회원이 아니신가요?<a href="{% url 'select_division' %}">회원가입</a>
+            </div>
+        </div>
     </div>
-    {% endfor %}
+</body>
 
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+<footer>
+    <div id="footer-nav">
+        <div class="container"></div>
+    </div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
 
-    <button type="submit">로그인</button>
-</form>
-
-<a href="{% url 'select_division' %}">회원가입</a>
+</html>

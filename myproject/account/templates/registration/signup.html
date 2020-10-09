@@ -1,22 +1,88 @@
-<form method="post" action="{% url 'signup' %}">
-    {% csrf_token %}
-    {% for i in form %}
-    <div>
-        {{i.label}}
-        {{i}}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 취준생 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정보입력</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- 헤더 부분 : 로고, 콜라보 이미지, 회원가입 프로세스 이미지 -->
+            <a href=""><img src="/media/images/logo.png" class="logo"></a>
+            <img src="/media/images/lotte_dbdb.png" alt="롯데 X두부두부" id="team-introduction">
+        </div>
+
+        <div class="process">
+            <div id="signin">회원가입<div class="dot--medium"></div>
+            </div>
+            <img src="/media/images/signin-process-02.png" alt="signin-process-02" class="signin-process">
+        </div>
+        <div class="sub-text">정보 입력</div>
+        <div>
+            <form method="post" action="{% url 'signup' %}">
+                <div class="user-input-area">
+                    {% csrf_token %}
+
+                    <!-- 닉네임 -->
+                    <div class="input-type">닉네임</div>
+                    <input type="nickname" name="nickname" id="nickname" autocomplete="off" size="400" placeholder="닉네임"
+                        required>
+                    <label for="nickname"></label>
+                    <button type="submit" class="input-btn" id="duplicate" value="중복 확인">중복 확인</button>
+                    <p></p>
+                    <!-- 이메일 -->
+                    <!-- 이메일도 중복확인 해야해요! -->
+                    <div class="input-type">이메일</div>
+                    <input type="email" name="email" id="email" autocomplete="off" size="400" placeholder="이메일"
+                        required>
+                    <label for="email"></label>
+                    <p></p>
+                    <!-- 비밀번호 -->
+                    <div class="input-type">비밀번호</div>
+                    <input type="password" name="password1" id="password" autocomplete="off" size="400"
+                        placeholder="비밀번호" required>
+                    <label for="password"></label>
+                    <p></p>
+                    <!-- 비밀번호 재확인-->
+                    <div class="input-type">비밀번호 재확인</div>
+                    <input type="password" name="password2" id="password-check" autocomplete="off" size="400"
+                        placeholder="비밀번호 재확인" required>
+                    <label for="password-check"></label>
+                    <p></p>
+
+                    <!-- 사진 넣는 부분 추가해주세용 -->
+                    <input type="file" name="picture">
+
+                </div>
+                <input type="submit" class="finish-btn" value="회원가입">
+            </form>
+
+            <!-- 중복확인 기능 및 비밀번호 맞는지 확인기능입니당 지금은 메시지로 돼있어여 -->
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+</body>
+
+<footer>
+    <div id="footer-nav">
+        <div class="container"></div>
     </div>
-    {% endfor %}
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
 
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-    <button type="submit">회원가입</button>
-</form>
-
-<!-- 중복확인 버튼 만들기 (js) -->
-<!-- https://ssungkang.tistory.com/entry/javascript-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EC%8B%9C-%EC%95%84%EC%9D%B4%EB%94%94-%EC%A4%91%EB%B3%B5-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0-ajax -->
+</html>

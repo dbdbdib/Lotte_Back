@@ -18,7 +18,7 @@ from .token import account_activation_token
 from .text import message
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from .forms import SignUpForm, IncumbentSignUpForm, SignInForm, UserUpdateForm, PasswordUpdateForm
+from .forms import SignUpForm, IncumbentSignUpForm, SignInForm, NicknameUpdateForm, PictureUpdateForm, PasswordUpdateForm
 from .models import User
 
 # Create your views here.
@@ -115,33 +115,65 @@ class SignInView(LoginView):
 
 
 # 마이페이지 뷰
-def mypage_update(request, pk):
+class MypageView(TemplateView):
+    template_name = 'mypage/mypage.html'
 
-    if request.method == "POST":
+    # context 뿌리는 메소드
+    def get_context_data(self, **kwargs):
 
-        # 비번 수정 폼
-        passwordform = PasswordUpdateForm(request.user, request.POST)
-        if passwordform.is_valid():  # 비번 수정 폼
-            user = passwordform.save()
-            update_session_auth_hash(request, user)  # 암호화하여 업뎃
+        user = self.request.user
+        context = {'user': user}
+        return context
+
+
+
+# 마이페이지 정보 수정
+class UpdateMypageView(TemplateView):
+    ### TemplateResponseMixin
+    template_name = 'mypage/update_mypage.html'
+
+    ### ContextMixin 
+    def get_context_data(self, **kwargs):
+        """ Adds extra content to our template """
+        context = super(UpdateMypageView, self).get_context_data(**kwargs)
+
+        context['nickname_form'] = NicknameUpdateForm(
+            instance = self.request.user,
+            prefix='nickname_form', 
+            data = self.request.POST if 'nickname_form-submit' in self.request.POST else None,
+            )
+
+        context['picture_form'] = PictureUpdateForm(
+            instance = self.request.user,
+            prefix='picture_form', 
+            data = self.request.POST if 'picture_form-submit' in self.request.POST else None,
+            files = self.request.FILES if 'picture_form-submit' in self.request.POST else None
+            )
+
+        context['password_form'] = PasswordUpdateForm(
+            user = self.request.user,
+            prefix='password_form', 
+            # Multiple 'submit' button paths should be handled in form's .save()/clean()
+            data = self.request.POST if 'password_form-submit' in self.request.POST else None,
+            )
+
+        return context
+
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+
+        if context['nickname_form'].is_valid():
+            context['nickname_form'].save()
+            messages.success(request, '닉네임 변경o')
+        elif context['picture_form'].is_valid():
+            context['picture_form'].save()
+            messages.success(request, '사진 변경o')
+        elif context['password_form'].is_valid():
+            context['password_form'].save()
+            update_session_auth_hash(request, self.request.user)  # 암호화하여 업뎃
+            messages.success(request, '비번 변경o')
         else:
-            messages.error(request, '비밀번호는 변경되지 않았습니다.') # 닉네임 중복확인
+            messages.error(request, '저장x, 다시 확인')
 
-        # 프로필 수정 폼
-        profileform = UserUpdateForm(request.POST, request.FILES, instance=request.user) # 프로필 수정 폼
-  
-        if profileform.is_valid():
-            profileform.save()
-            print(profileform.cleaned_data.get('picture'))
-            messages.success(request, '회원 정보가 변경되었습니다.')
-        else:
-            messages.error(request, '이미 존재하는 닉네임입니다.') # 닉네임 중복확인
-
-        return redirect('/mypage/{}'.format(pk))
-    else:
-        profileform = UserUpdateForm(instance=request.user)
-        passwordform = PasswordUpdateForm(request.user)
-
-    context = {'profileform':profileform, 'passwordform':passwordform, 'user': request.user, 'pk':pk}
-
-    return render(request,'mypage.html', context)
+        return self.render_to_response(context)

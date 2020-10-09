@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/update_mypage.css' %}">
+</head>
+
+<body>
+    <div class="background">
+        <div class="header">
+            <img src="/media/images/logo.png" class="logo">
+            <a href="{% url 'logout' %}">
+                <div class="logout-btn">
+                    로그아웃
+                </div>
+            </a>
+        </div>
+
+        <!-- 로그인한 사람의 마이페이지가 맞는 경우 -->
+        {%if user.pk is pk %}
+
+        <div class="board-wrap">
+            <div class="comp-wrap">
+                <div class="comp-list">
+                    <!-- 요기는 나중에 데이터 넣으면 for 문으로 돌아가게 하면 될 듯 -->
+                    <div class="comp-box">
+                        <div class="comp-name" id="name2">
+                            내가 쓴 글
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name3">
+                            스크랩한 글
+                        </div>
+                    </div>
+
+                    <div class="comp-box">
+                        <div class="comp-name" id="name3">
+                            정보 수정
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-wrap">
+                <div class="post-box-wrap">
+                    <div class="change-title">
+                        정보 수정
+                    </div>
+                    <hr>
+
+                    <!--  이 부분 예쁘게 같이 보여주기 -->
+                    이메일은 {{user.email}}
+                    구분은 {{user.get_division_display}}
+
+                    {%if user.division is 1%}
+                    계열은 {{user.get_line_display}}
+                    {%endif%}
+
+
+                    <!-- 닉넴 수정 부분 -->
+                    <form id='' class="" action="{% url 'update_mypage' user.pk %}" enctype="multipart/form-data"
+                        method="post">
+                        {% csrf_token %}
+
+                        <input type="text" name="nickname_form-nickname" maxlength="20" required id="id_nickname_form-nickname" value="{{user.nickname}}">
+
+                        <input type="submit" name="{{ nickname_form.prefix }}-submit" value="닉네임 수정" />
+                    </form>
+                    
+                    <hr>
+
+                    <!-- 사진 수정 부분 -->
+                    사진 <img src="{{user.picture.url}}">
+                    <form id='' class="" action="{% url 'update_mypage' user.pk %}" enctype="multipart/form-data"
+                        method="post">
+                        {% csrf_token %}
+
+                        <input type="file" name="picture_form-picture" required id="id_picture_form-picture" >
+
+                        <input type="submit" name="{{ picture_form.prefix }}-submit" value="프로필사진 수정" />
+                    </form>
+
+                    <hr>
+
+                    <!-- 비번 수정 부분 -->
+                    <form id='' class="" action="{% url 'update_mypage' user.pk %}" enctype="multipart/form-data"
+                    method="post">
+                    {% csrf_token %}
+                    <input type="pasword" name="password_form-old_password" autofocus="" required id="id_password_form-old_password">
+                    <input type="pasword" name="password_form-new_password1" autofocus="" required id="id_password_form-new_password1">
+                    <input type="password" name="password_form-new_password2" autofocus="" required id="id_password_form-new_password2">
+
+                    <input type="submit" name="{{ password_form.prefix }}-submit" value="비밀번호 수정" />
+                </form>
+
+
+                    <!-- 에러창 뜰 부분 (지금은 메시지로 표시) -->
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 다른 사람 마이페이지일 경우 -->
+        {% else %}
+
+        에러에러
+
+        {% endif %}
+
+    </div>
+
+    <div id="footer">
+        <div id="footer-nav">
+            <div class="container"></div>
+        </div>
+        <div id="footer-info">
+            <div class="footer-info-text">
+                Copyright © DOOBOO All Rights reserved.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

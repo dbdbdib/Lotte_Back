@@ -1,3 +1,47 @@
-인증메일이 발송되었습니다.
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
 
-<a href="{% url 'mainpage' %}">메인페이지 가기</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인증메일발송</title>
+    <link rel="stylesheet" href="{% static 'css/success_signup.css' %}">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <a href=""><img src="/media/images/logo.png" class="logo"></a>
+            <img src="/media/images/lotte_dbdb.png" alt="롯데 X두부두부" id="team-introduction">
+        </div>
+
+        <div class="process">
+            <div id="signin">회원가입<div class="dot--medium"></div></div>
+            <img src="/media/images/signin-process-03.png" alt="signin-process-03" class="signin-process">
+        </div>
+
+        <!-- 로그인 form -->
+        <div class="login-form">
+            <!-- 회원가입 완료 안내 -->
+            <div class="signin_complete">
+                <div id="signin_complete_line1">인증메일이 발송되었습니다<div class="dot--small"></div></div>
+                <div id="signin_complete_line2">메일을 확인해주세요</div>
+            </div>
+        </div>
+
+</body>
+
+<footer>
+    <div id="footer-nav">
+        <div class="container"></div>
+    </div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
+
+</html>
