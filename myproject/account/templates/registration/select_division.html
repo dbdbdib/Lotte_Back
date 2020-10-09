@@ -1,32 +1,36 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <link rel="stylesheet" href="{% static 'css/select_division.css' %}">
 </head>
+
 <body>
-    <div class = "background">
+    <div class="background">
         <div class="header">
             <a href=""><img src="/media/images/logo.png" class="logo"></a>
             <img src="/media/images/lotte_dbdb.png" alt="롯데 X두부두부" id="team-introduction">
         </div>
 
         <div class="process">
-            <div id="signin">회원가입<div class="dot--medium"></div></div>
+            <div id="signin">회원가입<div class="dot--medium"></div>
+            </div>
             <img src="/media/images/signin-process-01.png" alt="signin-process-01" class="signin-process">
         </div>
         <!-- 회원가입 form -->
-        <div class = "signin-form">
-            <div><!--현직자/취준생 가입 구분해주는 div입니당-->
+        <div class="signin-form">
+            <div>
+                <!--현직자/취준생 가입 구분해주는 div입니당-->
                 <!--각각 버튼 위에 이미지 추가해주기-->
                 <div class="sub-text">가입 구분</div>
-                    <!-- imcubent img src 추가-->
-                    <a href="{% url 'signup' %}"><button class="option">현직자</button></a>
-                    <!-- jobseeker img src 추가-->
-                    <a href="{% url 'incumbent_signup' %}"><button class="option">취업준비생</button></a>
+                <!-- imcubent img src 추가-->
+                <a href="{% url 'signup' %}"><button class="option">취업준비생</button></a>
+                <!-- jobseeker img src 추가-->
+                <a href="{% url 'incumbent_signup' %}"><button class="option">현직자</button></a>
             </div>
             <p></p>
             <button class="finish-btn">다음 단계</button>
