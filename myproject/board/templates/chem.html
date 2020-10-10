@@ -5,28 +5,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/board.css' %}">
+    <link rel="stylesheet" href="{% static 'css/board_list.css' %}">
     <title>LIKELION X lotte 화학/건설/제조</title>
 </head>
 <body>
-    <div class="body-container">
-        <div class="left-container">
-            <ul>롯데엠시시</ul>
-            <ul>롯데건설</ul>
-            <ul>롯데CM사업본부</ul>
-            <ul>롯데기공</ul>
-            <ul>롯데알미늄</ul>
-            <ul>롯데정밀화학</ul>
-            <ul>롯데케미칼</ul>
-            <ul>롯데비피화학</ul>
-            <ul>캐논코리아 비즈니스 솔루션</ul>
-            <ul>케이피켐텍</ul>
-            <ul>한국후지필름</ul>
-        </div>
-
-        <div class="right-container">
-            
-        </div>
-    </div>
+    {% for one_chem in all_chem %}
+    <ul>
+        <a href="{% url 'chem_post' one_chem.id %}">{{one_chem}}</a>
+    </ul>
+    {% endfor %}
+    <!-- <ul>롯데엠시시</ul>
+    <ul>롯데건설</ul>
+    <ul>롯데CM사업본부</ul>
+    <ul>롯데기공</ul>
+    <ul>롯데알미늄</ul>
+    <ul>롯데정밀화학</ul>
+    <ul>롯데케미칼</ul>
+    <ul>롯데비피화학</ul>
+    <ul>캐논코리아 비즈니스 솔루션</ul>
+    <ul>케이피켐텍</ul>
+    <ul>한국후지필름</ul> -->
 </body>
 </html>

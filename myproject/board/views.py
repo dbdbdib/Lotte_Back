@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from .models import Food, Chem, Retail, Tour
 
-# Create your views here.
 # 메인페이지 뷰
 class MainPageView(TemplateView):
     template_name = 'mainpage.html'
@@ -14,13 +14,41 @@ class MainPageView(TemplateView):
         return context
 
 def food(request):
-    return render(request, 'food.html')
+    all_food = Food.objects.all()
+    context = {'all_food':all_food}
+    return render(request, 'food.html', context)
+
+def food_board(request, board_id):
+    food_num = Food.objects.get(id=board_id)
+    context['food_num'] = food_num
+    return render(request, 'post/index.html', context)
 
 def retail(request):
-    return render(request, 'retail.html')
+    all_retail = Retail.objects.all()
+    context = {'all_retail':all_retail}
+    return render(request, 'retail.html', context)
 
+def retail_board(request, board_id):
+    retail_num = Retail.objects.get(id=board_id)
+    context['retail_num'] = retail_num
+    return render(request, 'post/index.html', context)
+    
 def chem(request):
-    return render(request, 'chem.html')
+    all_chem = Chem.objects.all()
+    context = {'all_chem':all_chem}
+    return render(request, 'chem.html', context)
+
+def chem_board(request, board_id):
+    chem_num = Chem.objects.get(id=board_id)
+    context['chem_num'] = chem_num
+    return render(request, 'post/index.html', context)
 
 def tour(request):
-    return render(request, 'tour.html')
+    all_tour = Tour.objects.all()
+    context = {'all_tour':all_tour}
+    return render(request, 'tour.html', context)
+
+def tour_board(request, board_id):
+    tour_num = Tour.objects.get(id=board_id)
+    context['tour_num'] = tour_num
+    return render(request, 'post/index.html', context)

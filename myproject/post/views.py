@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # Create your views here.
-def index(request):
+def index(request, board_id):
     all_post = Post.objects.all()
 
     context = dict()
@@ -28,7 +28,7 @@ def create(request):
             clean_form.author = User.objects.get(id = request.user.id)
             # 추후에 User.id 할당해야해
             clean_form.save()
-            return redirect('post')
+            return redirect('post/<int:board_id>')
         else:
             context['write_form'] = temp_form
             return render(request, 'write.html', context)

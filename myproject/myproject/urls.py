@@ -17,8 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from account.views import SelectDivisionView, SignUpView, IncumbentSignUpView, SuccessSignUpView, ActivateView, SignInView, MypageView, UpdateMypageView
-from board.views import MainPageView, food, chem, retail, tour
-
+from board.views import MainPageView, food, food_board, chem, retail, tour
+from post.views import index, detail
 # for Media file전달
 from django.conf import settings
 from django.conf.urls.static import static
@@ -40,5 +40,11 @@ urlpatterns = [
     path('retail/', retail, name='retail'),
     path('chem/', chem, name='chem'),
     path('tour/', tour, name='tour'),
-    path('', include('post.urls'))
+
+    path('food/post/<int:board_id>', index, name="food_post"),
+    path('retail/post/<int:board_id>', index, name="retail_post"),
+    path('chem/post/<int:board_id>', index, name="chem_post"),
+    path('tour/post/<int:board_id>', index, name="tour_post"),
+
+    path('', include('post.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

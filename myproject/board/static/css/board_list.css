@@ -1,0 +1,166 @@
+.background {
+    margin: 0 auto;
+    width: 1920px;
+    background: #FFFFFF;
+    opacity: 1;
+}
+
+/* 헤더 부분 */
+.logo {
+    margin-top: 66px;
+    margin-left: 904px;
+    width: 113px;
+    height: 113px;
+    opacity: 1;
+    display: inline-block;
+}
+
+.mainpage-btn {
+    cursor: pointer;
+}
+/* .mainpage-btn {
+    cursor: pointer;
+    width: 100px;
+    height: 36px;
+    font: normal normal normal 20px/55px Apple SD Gothic Neo;
+    display: inline-block;
+} */
+
+.mypage-btn {
+    cursor: pointer;
+    position: relative;
+    bottom: 56px;
+    left: 576px;
+    width: 100px;
+    height: 36px;
+    font: normal normal normal 20px/55px Apple SD Gothic Neo;
+    display: inline-block;
+}
+
+.board-wrap {
+    margin-top: 50px;
+    margin-left: 75px;
+}
+
+/* 회사 선택 부분 */
+.comp-wrap {
+    display: inline-block;
+    height: 1099px;
+}
+
+.comp-title {
+    font: normal normal normal 30px/55px Apple SD Gothic Neo;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.comp-box {
+    display: table;
+    width: 388px;
+    height: 98px;
+    border: 1px solid #707070;
+    box-shadow: 5px 5px 5px #00000029;
+    border-radius: 29px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.comp-name {
+    display: table-cell;
+    vertical-align: middle;
+    font: normal normal normal 30px/55px Apple SD Gothic Neo;
+    text-align: center;
+}
+
+/* 자바스크립트로 클릭 하면 색깔 바뀌게 하고 일단 뼈대 잡아두기 */
+#name2, #name3 {
+    color: #9A9A9A;
+}
+
+/* 게시글 부분 */
+.post-wrap {
+    display: inline-block;
+    height: 1099px;
+    margin-left: 30px;
+}
+
+.post-title {
+    margin-bottom: 20px;
+    font: normal normal normal 30px/55px Apple SD Gothic Neo;
+    text-align: center;
+}
+
+.post-box-wrap {
+    border: 1px solid #EFEFEF;
+    width: 1370px;
+    height: 929px;
+    background: #EFEFEF 0% 0% no-repeat padding-box;
+    border-radius: 25px;
+}
+
+.post-box {
+    margin-top: 17px;
+    margin-left: 17px;
+    display: table;
+    width: 1335px;
+    height: 80px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 22px;
+}
+
+.post {
+    cursor: pointer;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font: normal normal normal 25px/55px Apple SD Gothic Neo;
+    color: #333333;
+}
+
+.create-btn {
+    display: table;
+    margin-top: 15px;
+    width: 219px;
+    height: 68px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #707070;
+    border-radius: 15px;
+    float: right;
+
+}
+
+.btn-text {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font: normal normal normal 22px/58px Apple SD Gothic Neo;
+    letter-spacing: 0px;
+    color: #6F6F6F;
+    cursor: pointer;
+}
+
+/*  푸터 부분 */
+#footer {
+    display: block;
+    margin-top: 39.5px;
+    width: 100%;
+    height: 259px;
+    background: #55585A 0% 0% no-repeat padding-box;
+}
+
+#footer-nav {
+    height: 187px;
+}
+#footer-info {
+    border-top: 1px solid black;
+    height: 72px;
+}
+.footer-info-text {
+    margin-top: 16px;
+    margin-left: 50px;
+    font-size: 20px;
+    color: #FFFFFF;
+    opacity: 1;
+}
