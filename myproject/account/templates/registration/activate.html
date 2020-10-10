@@ -18,17 +18,23 @@
         </div>
 
         <div class="process">
-            <div id="signin">회원가입<div class="dot--medium"></div></div>
+            <div id="signin">회원가입<div class="dot--medium"></div>
+            </div>
             <img src="/media/images/signin-process-03.png" alt="signin-process-03" class="signin-process">
         </div>
 
         <!-- 로그인 form -->
         <div class="login-form">
             <!-- 회원가입 완료 안내 -->
-            <div class="signin_complete">
-                <div id="signin_complete_line1">회원가입이 완료되었습니다<div class="dot--small"></div></div>
-                <div id="signin_complete_line2">이제 서비스를 이용할 수 있습니다</div>
-            </div>
+            <a href="{% url 'mainpage' %}">
+                <div class="signin_complete">
+
+                    <div id="signin_complete_line1">회원가입이 완료되었습니다<div class="dot--small"></div>
+                    </div>
+                    <div id="signin_complete_line2">이제 서비스를 이용할 수 있습니다</div>
+
+                </div>
+            </a>
         </div>
 
 </body>
