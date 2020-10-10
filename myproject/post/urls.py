@@ -4,7 +4,7 @@ from post.views import index, create, detail, update, delete, create_comment, co
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-    # path('post/<int', index, name="post"),
+    path('post/', index, name="post"),
     path('create/', create, name="create"),
     path('detail/<int:post_id>', detail, name="detail"),
     path('update/<int:post_id>', update, name="update"),

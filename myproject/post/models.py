@@ -13,6 +13,7 @@ class Post(models.Model):
     scrap  = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="scrap_user")
     create_at = models.DateTimeField('작성시간', default = timezone.now)
     image = models.ImageField('사진',upload_to='images/', blank=True, null=True, name='image')
+
     def __str__(self):
         return self.title
 

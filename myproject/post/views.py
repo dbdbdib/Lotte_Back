@@ -28,7 +28,7 @@ def create(request):
             clean_form.author = User.objects.get(id = request.user.id)
             # 추후에 User.id 할당해야해
             clean_form.save()
-            return redirect('post/<int:board_id>')
+            return redirect('post')
         else:
             context['write_form'] = temp_form
             return render(request, 'write.html', context)

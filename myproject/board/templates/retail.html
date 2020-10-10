@@ -11,24 +11,8 @@
 <body>
     {% for one_retail in all_retail %}
     <ul>
-        <a href="{% url 'retail_post' one_retail.id %}">{{one_retail}}</a>
+        <div class="retail"><a href="{% url 'retail_post' one_retail.id %}">{{one_retail}}</a></div>
     </ul>
     {% endfor %}
-    <!-- <div class="body-container">
-        <div class="left-container">
-            <ul>롯데백화점</ul>
-            <ul>롯데마트</ul>
-            <ul>롯데슈퍼</ul>
-            <ul>코리아세븐</ul>
-            <ul>롯데하이마트</ul>
-            <ul>롯데홈쇼핑</ul>
-            <ul>롯데쇼핑 e커머스</ul>
-            <ul>롭스</ul>
-            <ul>롯데멤버스</ul>
-            <ul>롯데컬처웍스</ul>
-            <ul>롯데에프알엘코리아</ul>
-            <ul>롯데상사</ul>
-        </div>
-    </div> -->
 </body>
 </html>

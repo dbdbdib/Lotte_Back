@@ -10,6 +10,10 @@
 </head>
 
 <body>
+    {% for ct in companytype %}
+        {{ct}}<br>
+    {% endfor%}
+    <!-- url ,,, -->
     <div class="container">
         <div class="header">
             <img src="/media/images/logo.png" class="logo">
@@ -29,30 +33,25 @@
 
         <!-- 요기서 안에 글씨랑 로고 넣으려고 하면 계속 앞에 친구가 붕뜨면서 이쁘게 안나옴 -->
         <div class="content-box">
-            <a href="{% url 'food' %}">
                 <div class="select-box" id="select--food" onmouseover="mouseOnEvent()">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">식품</div>
                 </div>
-            </a>
-            <a href="{% url 'retail' %}">
+    
                 <div class="select-box" id="select--distribution">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">유통</div>
                 </div>
-            </a>
-            <a href="{% url 'chem' %}">
+        
                 <div class="select-box" id="select--chemistry">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">화학/건설/제조</div>
                 </div>
-            </a>
-            <a href="{% url 'tour' %}">
+
                 <div class="select-box" id="select--trip">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">관광/서비스/금융</div>
                 </div>
-            </a>
         </div>
     </div>
 </body>
