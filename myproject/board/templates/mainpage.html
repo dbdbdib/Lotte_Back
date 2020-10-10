@@ -24,35 +24,56 @@
                 <div class="sign-in"><a href="{% url 'select_division' %}">회원 가입</a></div>
                 {%endif%}
 
+
             </div>
         </div>
 
         <!-- 요기서 안에 글씨랑 로고 넣으려고 하면 계속 앞에 친구가 붕뜨면서 이쁘게 안나옴 -->
         <div class="content-box">
+            {% for type in companytype %}
+
+            {% comment %}
+            {{forloop.counter0}}
+            {% endcomment %}
+
+            <a href=" {{type}} ">
+
+                <div class="select-box" id="select--food" onmouseover="mouseOnEvent()">
+                    <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
+                    <div class="business-name">{{type}}</div>
+                </div>
+            </a>
+            {% endfor %}
+
+            {% comment %}
             <a href="{% url 'food' %}">
                 <div class="select-box" id="select--food" onmouseover="mouseOnEvent()">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">식품</div>
                 </div>
             </a>
-            <a href="{% url 'retail' %}">
+
+            <a href="{% url 'food' %}">
                 <div class="select-box" id="select--distribution">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">유통</div>
                 </div>
             </a>
-            <a href="{% url 'chem' %}">
+
+            <a href="{% url 'food' %}">
                 <div class="select-box" id="select--chemistry">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">화학/건설/제조</div>
                 </div>
             </a>
-            <a href="{% url 'tour' %}">
+            <a href="{% url 'food' %}">
                 <div class="select-box" id="select--trip">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">관광/서비스/금융</div>
                 </div>
             </a>
+            {% endcomment %}
+
         </div>
     </div>
 </body>

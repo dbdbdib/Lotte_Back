@@ -1,166 +1,227 @@
-.background {
-    margin: 0 auto;
-    width: 1920px;
+* {
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .dot--medium {
+    /* size */
+    width: 15px;
+    height: 15px;
+    /* design */
+    background:#da291c;
+    border-radius: 3px;
+    transform: rotate(45deg);
+    /* position */
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  .container {
+    width: 1200px;
     background: #FFFFFF;
-    opacity: 1;
-}
-
-/* 헤더 부분 */
-.logo {
-    margin-top: 66px;
-    margin-left: 904px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  
+  /* 네비게이션 바 */
+  #header {
+    margin-top: 60px;
+    margin-bottom: 50px;
+  }
+  
+  .logo {
     width: 113px;
     height: 113px;
-    opacity: 1;
-    display: inline-block;
-}
-
-.mainpage-btn {
-    cursor: pointer;
-}
-/* .mainpage-btn {
-    cursor: pointer;
-    width: 100px;
-    height: 36px;
-    font: normal normal normal 20px/55px Apple SD Gothic Neo;
-    display: inline-block;
-} */
-
-.mypage-btn {
-    cursor: pointer;
-    position: relative;
-    bottom: 56px;
-    left: 576px;
-    width: 100px;
-    height: 36px;
-    font: normal normal normal 20px/55px Apple SD Gothic Neo;
-    display: inline-block;
-}
-
-.board-wrap {
-    margin-top: 50px;
-    margin-left: 75px;
-}
-
-/* 회사 선택 부분 */
-.comp-wrap {
-    display: inline-block;
-    height: 1099px;
-}
-
-.comp-title {
-    font: normal normal normal 30px/55px Apple SD Gothic Neo;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-
-.comp-box {
-    display: table;
-    width: 388px;
-    height: 98px;
-    border: 1px solid #707070;
-    box-shadow: 5px 5px 5px #00000029;
-    border-radius: 29px;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-.comp-name {
-    display: table-cell;
-    vertical-align: middle;
-    font: normal normal normal 30px/55px Apple SD Gothic Neo;
-    text-align: center;
-}
-
-/* 자바스크립트로 클릭 하면 색깔 바뀌게 하고 일단 뼈대 잡아두기 */
-#name2, #name3 {
-    color: #9A9A9A;
-}
-
-/* 게시글 부분 */
-.post-wrap {
-    display: inline-block;
-    height: 1099px;
-    margin-left: 30px;
-}
-
-.post-title {
-    margin-bottom: 20px;
-    font: normal normal normal 30px/55px Apple SD Gothic Neo;
-    text-align: center;
-}
-
-.post-box-wrap {
-    border: 1px solid #EFEFEF;
-    width: 1370px;
-    height: 929px;
-    background: #EFEFEF 0% 0% no-repeat padding-box;
-    border-radius: 25px;
-}
-
-.post-box {
-    margin-top: 17px;
-    margin-left: 17px;
-    display: table;
-    width: 1335px;
-    height: 80px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    border-radius: 22px;
-}
-
-.post {
-    cursor: pointer;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    font: normal normal normal 25px/55px Apple SD Gothic Neo;
-    color: #333333;
-}
-
-.create-btn {
-    display: table;
-    margin-top: 15px;
-    width: 219px;
-    height: 68px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #00000029;
-    border: 1px solid #707070;
-    border-radius: 15px;
-    float: right;
-
-}
-
-.btn-text {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    font: normal normal normal 22px/58px Apple SD Gothic Neo;
-    letter-spacing: 0px;
-    color: #6F6F6F;
-    cursor: pointer;
-}
-
-/*  푸터 부분 */
-#footer {
     display: block;
-    margin-top: 39.5px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .my_page {
+    text-align: center;
+    color: #000000;
+    font-size: 22px;
+    position: absolute;
+    top: 40px;
+    right: -50px;
+  }
+  
+  .my_page:hover {
+    font-weight: 600;
+  }
+  
+  /* 레이아웃 */
+  #layout {
+    display: flex;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* 회사 리스트 */
+  #business-field {
+    font-size: 55px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: right;
+  }
+  
+  .company-list {
+    width: 200px;
+  }
+  
+  .company-box {
+    width: 100%;
+    height: 50px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 5px 5px 5px #00000029;
+    border: 1px solid #707070;
+    border-radius: 11px;
+    opacity: 1;
+    margin-bottom: 20px;
+  }
+  
+  .company-name {
+    margin-top: 13px;
+    margin-bottom: 13px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  /* 게시글 */
+  .post-container {
+    margin-top: 56px;
+    width: 980px;
+    margin-left: 20px;
+  }
+  
+  #post-list__head {
+    width: 960px;
+  
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  
+    text-align: center;
+  
+    display: flex;
+    flex-shrink: 0;
+  }
+  
+  #post-list {
+    border: 1px solid #EFEFEF;
+    width: 100%;
+    height: 650px;
+    background: #EFEFEF 0% 0% no-repeat padding-box;
+    border-radius: 17px;
+  }
+  
+  .post-box {
+    margin: 10px auto;
+    width: 960px;
+    height: 50px;
+    background: #FFFFFF;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  
+  .post {
+    text-align: center;
+    vertical-align: middle;
+  
+    font-size: 18px;
+    color: #333333;
+  
+    display: flex;
+    flex-shrink: 0;
+  }
+  
+  .post>div{
+    line-height: 50px;
+  }
+  
+  /* ----- 게시글 정보 ----- */
+  .post-writer {
+    width: 200px;
+  }
+  
+  .post-title {
+    width: 380px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .post-date {
+    width: 110px;
+  }
+  
+  .post-views, .post-scrap, .post-comment {
+    width: 90px;
+  }
+  
+  .head {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  /* --------------------------------------------- */
+  
+  .nickname-logo {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  
+  /* 게시글 작성 버튼 */
+  .btn-wrap {
+    width: 980px;
+    margin-top: 15px;
+    display: flex;
+  }
+  
+  .btn-create {
+    width: 200px;
+    height: 50px;
+    margin-left: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 3px 6px #00000029;
+    outline: none;
+    border: 1px solid #707070;
+    border-radius: 11px;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0px;
+    color: #6F6F6F;;
+  }
+  
+  /* footer */
+  footer {
+    margin-top: 50px;
     width: 100%;
     height: 259px;
-    background: #55585A 0% 0% no-repeat padding-box;
-}
-
-#footer-nav {
+    background: #55585A;
+  }
+  
+  #footer-nav {
     height: 187px;
-}
-#footer-info {
+  }
+  #footer-info {
     border-top: 1px solid black;
     height: 72px;
-}
-.footer-info-text {
+  }
+  .footer-info-text {
     margin-top: 16px;
     margin-left: 50px;
     font-size: 20px;
     color: #FFFFFF;
     opacity: 1;
-}
+  }

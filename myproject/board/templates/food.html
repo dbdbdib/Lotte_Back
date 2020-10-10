@@ -2,23 +2,79 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/board_list.css' %}">
     <title>LIKELION X lotte 식품</title>
 </head>
+
 <body>
-{% for one_food in all_food %}
-<ul><a href="{% url 'food_post' one_food.id %}">{{one_food}}</a></ul>
-{% endfor %}
-<!-- <ul>롯데칠성음료(음료BG)</ul>
-<ul>롯데칠성음료(주류BG)</ul>
-<ul>롯데푸드</ul>
-<ul>롯데네슬레</ul>
-<ul>롯데아사히주류</ul>
-<ul>롯데유통사업본부</ul>
-<ul>롯데중앙연구소</ul>
-<ul>롯데지알에스</ul> -->
+    <div class="container">
+        <div id="header">
+            <img src="../img/logo.png" class="logo">
+            <span class="my_page"><a href="">마이페이지</a></span>
+        </div>
+
+        <div id="layout">
+            <div class="company-list">
+                <div id="business-field">식품<div class="dot--medium"></div>
+                </div>
+                {% for com in company %}
+                <a href="">
+                    <div class="company-box">
+                        <div class="company-name">{{com}}</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+
+            <div class="post-container">
+                <!--이거 간격 같게 어케 하나요...??-->
+                <div id="post-list__head">
+                    <div id="post-writer__head" class="post-writer head">닉네임</div>
+                    <div id="post-title__head" class="post-title head">제목</div>
+                    <div id="post-date__head" class="post-date head">게시 날짜</div>
+                    <div id="post-views__head" class="post-views head">조회수</div>
+                    <div id="post-scrap__head" class="post-scrap head">스크랩</div>
+                    <div id="post-comment__head" class="post-comment head">댓글</div>
+                </div>
+
+                <div id="post-list">
+
+                    <div class="post-box">
+                        <div class="post" id="post1">
+                            <div class="post-writer">현트리빈</div>
+                            <div class="post-title">가붕이가 최고야</div>
+                            <div class="post-date">2020.10.09</div>
+                            <div class="post-views">10000</div>
+                            <div class="post-scrap">30</div>
+                            <div class="post-comment">5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{% url 'create' %}">
+                    <div class="btn-wrap">
+                        <button class="btn-create">게시글 작성</button>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
 </body>
+
+<footer>
+    <div id="footer-nav"></div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
+
 </html>
