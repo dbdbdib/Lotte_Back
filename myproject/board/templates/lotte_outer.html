@@ -6,7 +6,9 @@
     <title>계열별 회사 목록</title>
 </head>
 <body>
-    <!-- 롯데제과 중복 -->
+    <!-- 롯데유통사업 오타 났는데 엔터 쳐서 저장됨 ,, 
+         롯데백화점도,,    
+    -->
     {% for company in company.companies.all %}
         {{ company.subject }} <br>
     {% endfor %}
