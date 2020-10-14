@@ -20,7 +20,7 @@ def lotte_outer(request, pk):
     company = Type.objects.get(pk=pk)
     return render(request, 'lotte_outer.html', {'company':company})
 
-def lotte_inner(request, pk):
+def lotte_add(request, pk):
     company = get_object_or_404(Type, pk=pk)
 
     if request.method == 'POST':
@@ -32,4 +32,4 @@ def lotte_inner(request, pk):
         )
 
         return redirect('lotte_outer', pk=company.pk)
-    return render(request, 'lotte_inner.html', {'company':company})
+    return render(request, 'lotte_add.html', {'company':company})
