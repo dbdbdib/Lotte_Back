@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from account.views import SelectDivisionView, SignUpView, IncumbentSignUpView, SuccessSignUpView, ActivateView, SignInView, MypageView, UpdateMypageView
-from board.views import MainPageView, lotte_outer, lotte_add
+from board.views import MainPageView, lotte_outer, lotte_add, board_post
 from post.views import index, detail, create
 # for Media file전달
 from django.conf import settings
@@ -38,6 +38,7 @@ urlpatterns = [
     # path('mypage/<int:pk>/update/nickname_update', NicknameUpdate(), name='nickname_update'),
 
     path('MainPageView/<int:pk>', lotte_outer, name='lotte_outer'),
-    path('MainPageView/<int:pk>/add', lotte_add, name='lotte_add'),
+
+    # path('MainPageView/<int:pk>/add', lotte_add, name='lotte_add'),
     path('', include('post.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

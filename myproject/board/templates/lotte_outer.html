@@ -10,7 +10,7 @@
          롯데백화점도,,    
     -->
     {% for company in company.companies.all %}
-        {{ company.subject }} <br>
+      {{ company.subject }} {{ company.pk }} <br>
     {% endfor %}
 </body>
 </html>
