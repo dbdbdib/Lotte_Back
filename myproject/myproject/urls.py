@@ -39,5 +39,4 @@ urlpatterns = [
     # path('board/<int:pk>/', )
 
     path('', include('post.urls')),
-    path('', include('board.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
