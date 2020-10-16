@@ -58,6 +58,8 @@ def index(request, pk):
 
 def create(request, pk):
     context = dict()
+    company_type = company_type = Company.objects.get(pk=pk)
+    context['company_type'] = company_type
 
     if request.method == 'POST':
         # media 파일 올려주려면, request.FILES 추가해주어야한다.
@@ -90,7 +92,7 @@ def detail(request, pk, post_id):
 
     return render(request,'detail.html',context)
         
-def update(request,post_id):
+def update(request, pk, post_id):
     context = dict()
     
     if request.method == "POST":
@@ -98,7 +100,7 @@ def update(request,post_id):
         
         if temp_form.is_valid():
             temp_form.save()
-            return redirect('post')
+            return redirect('index', pk)
         else:
             context["write_form"] = temp_form
             return render(request,'write.html',context)
@@ -107,16 +109,19 @@ def update(request,post_id):
         return render(request,'write.html', context)
         
         
-def delete(request,post_id):
+def delete(request, pk, post_id):
     detail_post = Post.objects.get(id = post_id)
     detail_post.delete()
     
     # User 정보 받아올 수 있을때 사용
     # if detail_post.author == request.user:
     #     detail_post.delete()
-    return redirect('post')
+    return redirect('index', pk)
     
-def create_comment(request,post_id):
+def create_comment(request, pk, post_id):
+    company_index = Company.objects.get(pk=pk)
+    context = {'company_index':company_index}
+
     if request.method=="POST":
         temp_form = CommentForms(request.POST)
         if temp_form.is_valid():
@@ -127,12 +132,12 @@ def create_comment(request,post_id):
 
             clean_form.save()
             temp_form.save()
-        return redirect('detail', post_id)
+        return redirect('detail', pk, post_id)
         
-def comment_delete(request,post_id, com_id):
+def comment_delete(request, pk, post_id, com_id):
     del_com = Comment.objects.get(id=com_id)
     del_com.delete()
-    return redirect('detail', post_id)
+    return redirect('detail', pk, post_id)
 
 def scrap(request, post_id):
     context = dict()

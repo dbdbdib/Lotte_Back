@@ -44,12 +44,12 @@ urlpatterns = [
     path('MainPageView/<int:pk>/index', index, name='index'),
     path('MainPageView/<int:pk>/create', create, name='create'),
 
+    # <int:pk> 회사 번호
     path('detail/<int:pk>/<int:post_id>', detail, name="detail"),
-    path('<int:pk>/update/<int:post_id>', update, name="update"),
-
-    path('MainPageView/<int:pk>/delete/<int:post_id>', delete, name="delete"),
-    path('create_comment/<int:post_id>', create_comment, name="create_comment"),
-    path('comment_delete/<int:post_id>/<int:com_id>',
-         comment_delete, name="comment_delete"),
+    path('update/<int:pk>/<int:post_id>', update, name="update"),
+    path('delete/<int:pk>/<int:post_id>', delete, name="delete"),
+    
+    path('create_comment/<int:pk>/<int:post_id>', create_comment, name="create_comment"),
+    path('comment_delete/<int:pk>/<int:post_id>/<int:com_id>', comment_delete, name="comment_delete"),
     path('scrap/<int:post_id>', scrap, name="scrap"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
