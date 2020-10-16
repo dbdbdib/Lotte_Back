@@ -5,14 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>새 글 작성</title>
     <link rel="stylesheet" href='{% static "css/write.css" %}' type="text/css" />
 </head>
 
 <body>
     <div class="container">
+
         <div class="nav_bar">
-            <img src="{% static 'img/logo.png' %}" class="logo">
+            <a href="{% url 'mainpage' %}">
+                <img src="{% static 'img/logo.png' %}" class="logo">
+            </a>
         </div>
 
         <div class="post-container">
@@ -34,9 +37,7 @@
                         <label for="id_image">파일</label>
                         {{write_form.image}}
 
-                        <!-- <button class="btn">
-                            <!-<input type="hidden" value=''> -->
-                        <!-- </button> -->
+
                     </div>
                     <div class="btn--right">
                         <button class="btn">작성 완료</button>

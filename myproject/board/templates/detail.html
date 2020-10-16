@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+
+</head>
+
+<body>
+    <div class="container">
+        <div id="header">
+            <a href="{% url 'mainpage' %}"> <img src="{% static 'img/logo.png' %}" class="logo"></a>
+
+            <span class="my_page"><a href="{% url 'mainpage' %}">마이페이지</a></span>
+        </div>
+
+        <div id="layout">
+            <div class="company-list">
+                <div id="business-field">식품<div class="dot--medium"></div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데제과</div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데푸드</div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데칠성음료</div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데 푸드</div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데 네슬레</div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데 아사히주류</div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데 유통사업 본부</div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데 중앙 연구소</div>
+                </div>
+                <div class="company-box">
+                    <div class="company-name">롯데 지알에스</div>
+                </div>
+            </div>
+
+            <div class="post-and-comment-container">
+                <div class="post-container">
+                    <div class="post-info">
+
+                        <div class="post-writer"> {{detail_post.author}}</div>
+                        <div class="post-title"> {{detail_post.title}} </div>
+                        <div class="post-info-wrap">
+                            <div class="current-time"> {{detail_post.create_at}}</div>
+                            <div class="view-number">조회수 0</div>
+                            <div class="scrap-number">스크랩 : {{detail_post.scrap.all|length}}</div>
+                            <div class="comment-number">댓글 : {{comment_all|length}}</div>
+
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        {{detail_post.desc}}
+                    </div>
+
+                    <div class="image-wrap">
+                        {% if detail_post.image%}
+                        <div class="image">
+                            <img src="{{detail_post.image.url}}" alt="">
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="btn-wrap">
+                        <div class="btn--left">
+                            <button class="btn">
+
+                                {% if user in detail_post.scrap.all %}
+                                <span class="scrap">🧡</span>
+                                <input type="hidden" value="{{detail_post.id}}">
+                                {%else%}
+                                <span class="scrap">🖤</span>
+                                <input type="hidden" value="{{detail_post.id}}">
+
+                                {%endif%}
+                            </button>
+                            <button class="btn">
+                                <a href="{% url 'post' %}">글목록</a>
+                            </button>
+                        </div>
+                        <div class="btn--right">
+
+
+                            <button class="btn">
+                                <a href="{% url 'update' detail_post.id %}">수정</a>
+                            </button>
+                            <button class="btn">
+                                <a href="{% url 'delete' detail_post.id%}">삭제</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="comment-container">
+                    {% for com in comment_all%}
+
+                    <div class="comment-writer-username">{{com.author}}</div>
+                    <div class="comment-wrap">
+                        <div class="comment-content">{{com}}</div>
+                        <div class="comment-control-wrap">
+                            <!-- <div class="comment-control"> -->
+                            <a class="comment_delete" href="{% url 'comment_delete' detail_post.id com.id %}">❌</a>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    {%endfor%}
+
+
+                    <div class="comment-writing-container">
+                        <form class="comment_form" action="{% url 'create_comment' detail_post.id %}" method="post">
+
+                            <!-- <div class="comment-writing"> -->
+                            {% csrf_token %}
+                            {{ comment_form.as_p }}
+
+                            <!-- </div> -->
+                            <input type="submit" class="btn" value='작성'>
+                            <!-- <button class="btn"> 
+                            </button> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<footer>
+    <div id="footer-nav"></div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="{% static 'js/scrap.js' %}"></script>
+
+</html>

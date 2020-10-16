@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView
-from .models import Type, Company, Board
-from post.forms import PostForms, CommentForms
+from .models import Type, Company, Post, Comment
+from .forms import PostForms, CommentForms
+
+User = get_user_model()
 
 # 메인페이지 뷰
 class MainPageView(TemplateView):
@@ -18,6 +21,7 @@ class MainPageView(TemplateView):
         
 # 큰 계열 4개
 def lotte_outer(request, pk):
+    # company 값이 lotte_outer에 같이 넘어감
     company = Type.objects.get(pk=pk)
     return render(request, 'lotte_outer.html', {'company':company})
 
@@ -30,33 +34,114 @@ def lotte_add(request, pk):
 
         topic = Company.objects.create(
             subject=subject,
-            company=company
+            company_type=company
         )
 
         return redirect('lotte_outer', pk=company.pk)
     return render(request, 'lotte_add.html', {'company':company})
 
-##############################################
+####### post/views.py 합치기 #######
 
-def board_post(request, company_pk):
-    try:
-        if request.method == "POST":
-            myform = BoardForm(request.POST, request.FILES)
-            if myform.is_valid():
-                myform.save()
-                return redirect('/bulletinboard_page/{}'.format(cafe_id))
-        myform = BoardForm()
+def index(request, pk):
+    
+    company_type = Company.objects.get(pk=pk)
 
-        all_post = Board.objects.all()
-        context = {'take_all_post':all_post, 'profile':profile}
-        return render(request, 'createpost.html', context)
-    except:
-        if request.method == "POST":
-            myform = BoardForm(request.POST, request.FILES)
-            if myform.is_valid():
-                myform.save()
-                return redirect('/bulletinboard_page/{}'.format(cafe_id))
+    all_post = Post.objects.filter(board=pk)
 
-        all_post = Board.objects.all()
-        context = {'take_all_post':all_post}
-        return render(request, 'createpost.html', context)
+    context = dict()
+    context['all_post'] = all_post
+    context['company_type'] = company_type
+
+    return render(request, 'index.html', context)
+
+def create(request, pk):
+
+    context = dict()
+
+    if request.method == 'POST':
+        # media 파일 올려주려면, request.FILES 추가해주어야한다.
+        temp_form = PostForms(request.POST, request.FILES)
+        # temp_form.photo = request.FILES['image']
+
+        if temp_form.is_valid():
+            clean_form = temp_form.save()
+            clean_form.author = User.objects.get(id = request.user.id)
+            # 추후에 User.id 할당해야해
+            clean_form.save()
+            return redirect('index', pk)
+        else:
+            context['write_form'] = temp_form
+            return render(request, 'write.html', context)
+    else:
+        context['write_form'] = PostForms()
+        return render(request, 'write.html', context)
+
+def detail(request,post_id):
+    context = dict()
+    detail_post = Post.objects.get(id = post_id)
+    context['detail_post'] = detail_post
+    context['comment_form'] = CommentForms()
+    context['comment_all'] = Comment.objects.filter(post= Post.objects.get(id = post_id)) # 얘가 listview역할
+    return render(request,'detail.html',context)
+        
+def update(request,post_id):
+    context = dict()
+    
+    if request.method == "POST":
+        temp_form = PostForms(request.POST,request.FILES, instance=Post.objects.get(id = post_id))
+        
+        if temp_form.is_valid():
+            temp_form.save()
+            return redirect('post')
+        else:
+            context["write_form"] = temp_form
+            return render(request,'write.html',context)
+    else:
+        context["write_form"] = PostForms(instance=Post.objects.get(id = post_id))
+        return render(request,'write.html', context)
+        
+        
+def delete(request,post_id):
+    detail_post = Post.objects.get(id = post_id)
+    detail_post.delete()
+    
+    # User 정보 받아올 수 있을때 사용
+    # if detail_post.author == request.user:
+    #     detail_post.delete()
+    return redirect('post')
+    
+def create_comment(request,post_id):
+    if request.method=="POST":
+        temp_form = CommentForms(request.POST)
+        if temp_form.is_valid():
+            clean_form = temp_form.save(commit=False)
+            
+            clean_form.post = Post.objects.get(id = post_id )
+            clean_form.author = User.objects.get(id = request.user.id)
+
+            clean_form.save()
+            temp_form.save()
+        return redirect('detail', post_id)
+        
+def comment_delete(request,post_id, com_id):
+    del_com = Comment.objects.get(id=com_id)
+    del_com.delete()
+    return redirect('detail', post_id)
+
+
+def scrap(request, post_id):
+    context = dict()
+    target_post = Post.objects.get(id=post_id)
+    if target_post.scrap.filter(id=request.user.id):
+        target_post.scrap.remove(request.user)
+        print("유저가 있다가 제거되었습니다.")
+        context["flag"] = "None"
+    else:
+        target_post.scrap.add(request.user)
+        print("user가 없다가 추가되었습니다")
+        context["flag"] = "Exist"
+
+    print(target_post.scrap.all())
+    context["len"] = len(target_post.scrap.all())
+
+    return HttpResponse(json.dumps(context), content_type='application/json')

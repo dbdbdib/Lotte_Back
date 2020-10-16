@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from account.views import SelectDivisionView, SignUpView, IncumbentSignUpView, SuccessSignUpView, ActivateView, SignInView, MypageView, UpdateMypageView
-from board.views import MainPageView, lotte_outer, lotte_add, board_post
-from post.views import index, detail, create
+from board.views import MainPageView, lotte_outer, lotte_add, index, detail, create, update, delete, create_comment, comment_delete, scrap
+
 # for Media file전달
 from django.conf import settings
 from django.conf.urls.static import static
+
+app_name = "board"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +41,15 @@ urlpatterns = [
 
     path('MainPageView/<int:pk>', lotte_outer, name='lotte_outer'),
 
-    # path('MainPageView/<int:pk>/add', lotte_add, name='lotte_add'),
-    path('', include('post.urls')),
+    path('MainPageView/<int:pk>/index', index, name='index'),
+    path('MainPageView/<int:pk>/create', create, name='create'),
+
+    path('MainPageView/<int:pk>/detail/<int:post_id>', detail, name="detail"),
+    path('MainPageView/<int:pk>/update/<int:post_id>', update, name="update"),
+
+    path('MainPageView/<int:pk>/delete/<int:post_id>', delete, name="delete"),
+    path('create_comment/<int:post_id>', create_comment, name="create_comment"),
+    path('comment_delete/<int:post_id>/<int:com_id>',
+         comment_delete, name="comment_delete"),
+    path('scrap/<int:post_id>', scrap, name="scrap"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
