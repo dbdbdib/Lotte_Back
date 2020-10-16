@@ -44,8 +44,8 @@ urlpatterns = [
     path('MainPageView/<int:pk>/index', index, name='index'),
     path('MainPageView/<int:pk>/create', create, name='create'),
 
-    path('MainPageView/<int:pk>/detail/<int:post_id>', detail, name="detail"),
-    path('MainPageView/<int:pk>/update/<int:post_id>', update, name="update"),
+    path('detail/<int:pk>/<int:post_id>', detail, name="detail"),
+    path('<int:pk>/update/<int:post_id>', update, name="update"),
 
     path('MainPageView/<int:pk>/delete/<int:post_id>', delete, name="delete"),
     path('create_comment/<int:post_id>', create_comment, name="create_comment"),

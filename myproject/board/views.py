@@ -45,17 +45,18 @@ def lotte_add(request, pk):
 def index(request, pk):
     
     company_type = Company.objects.get(pk=pk)
-
-    all_post = Post.objects.filter(board=pk)
+    company_post = Post.objects.filter(board=pk)
+    
+    all_post = Post.objects.all()
 
     context = dict()
     context['all_post'] = all_post
     context['company_type'] = company_type
+    context['company_post'] = company_post
 
     return render(request, 'index.html', context)
 
 def create(request, pk):
-
     context = dict()
 
     if request.method == 'POST':
@@ -76,12 +77,17 @@ def create(request, pk):
         context['write_form'] = PostForms()
         return render(request, 'write.html', context)
 
-def detail(request,post_id):
+def detail(request, pk, post_id):
     context = dict()
+
     detail_post = Post.objects.get(id = post_id)
+    company_index = Company.objects.get(pk=pk)
+    
     context['detail_post'] = detail_post
     context['comment_form'] = CommentForms()
     context['comment_all'] = Comment.objects.filter(post= Post.objects.get(id = post_id)) # 얘가 listview역할
+    context['company_index'] = company_index
+
     return render(request,'detail.html',context)
         
 def update(request,post_id):
@@ -127,7 +133,6 @@ def comment_delete(request,post_id, com_id):
     del_com = Comment.objects.get(id=com_id)
     del_com.delete()
     return redirect('detail', post_id)
-
 
 def scrap(request, post_id):
     context = dict()

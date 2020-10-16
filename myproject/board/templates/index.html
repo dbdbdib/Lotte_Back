@@ -16,11 +16,11 @@
     {%endif%}
 
 
-    <div class="cnt_post">{{all_post|length}}개의 게시글</div>
+    <div class="cnt_post">{{company_post|length}}개의 게시글</div>
 
     <a class="write-btn" href="{% url 'create' company_type.pk %}"> 글쓰기 </a><br>
     
-    {% for one_post in all_post%}
+    {% for one_post in company_post %}
     <br>
     {{one_post}}
     <br>
@@ -30,7 +30,7 @@
     <img src="{{ one_post.image.url }}" alt="alter">
     이미지
     {% endif %}
-    <a href="{% url 'detail' one_post.id %}">detail</a> <br>
+    <a href="{% url 'detail' company_type.pk one_post.id %}">detail</a><br>
     <hr>
     {%endfor%}
 </body>

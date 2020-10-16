@@ -90,17 +90,17 @@
                                 {%endif%}
                             </button>
                             <button class="btn">
-                                <a href="{% url 'post' %}">글목록</a>
+                                <a href="{% url 'index' company_index.pk %}"></a>글목록</a>
                             </button>
                         </div>
                         <div class="btn--right">
 
 
                             <button class="btn">
-                                <a href="{% url 'update' detail_post.id %}">수정</a>
+                                수정
                             </button>
                             <button class="btn">
-                                <a href="{% url 'delete' detail_post.id%}">삭제</a>
+                                삭제
                             </button>
                         </div>
                     </div>

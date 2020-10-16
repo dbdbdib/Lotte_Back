@@ -10,9 +10,6 @@
 </head>
 
 <body>
-    {% for o in outer %}
-        <a href="{% url 'lotte_outer' o.pk %}">{{o}}</a><br>
-    {% endfor %}
     <div class="container">
         <div class="header">
             <img src="/media/images/logo.png" class="logo">
@@ -31,13 +28,17 @@
         </div>
 
         <!-- 요기서 안에 글씨랑 로고 넣으려고 하면 계속 앞에 친구가 붕뜨면서 이쁘게 안나옴 -->
+        {% for o in outer %}
         <div class="content-box">
                 <div class="select-box" id="select--food" onmouseover="mouseOnEvent()">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
-                    <div class="business-name">식품</div>
+                    <div class="business-name">
+                            <a href="{% url 'lotte_outer' o.pk %}">{{o}}</a>
+                    </div>
                 </div>
-    
-                <div class="select-box" id="select--distribution">
+        </div>
+        {% endfor %}
+                <!-- <div class="select-box" id="select--distribution">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">유통</div>
                 </div>
@@ -53,7 +54,7 @@
                 </div>
         </div>
     </div>
-</body>
+</body> -->
 
 <footer>
     <div id="footer-nav"></div>
