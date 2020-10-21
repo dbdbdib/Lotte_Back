@@ -3,7 +3,6 @@
 __pycache__
 myvenv
 dbdbvenv
-db.sqlite3
 FETCH_HEAD
 **/migrations/**
 !**/migrations
