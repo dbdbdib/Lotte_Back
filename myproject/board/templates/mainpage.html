@@ -28,17 +28,23 @@
         </div>
 
         <!-- 요기서 안에 글씨랑 로고 넣으려고 하면 계속 앞에 친구가 붕뜨면서 이쁘게 안나옴 -->
-        {% for o in outer %}
         <div class="content-box">
+
+            {% for o in outer %}
+            <a href="{% url 'lotte_outer' o.pk %}">
+
                 <div class="select-box" id="select--food" onmouseover="mouseOnEvent()">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">
-                            <a href="{% url 'lotte_outer' o.pk %}">{{o}}</a>
+                        {{o}}
                     </div>
                 </div>
+            </a>
+
+            {% endfor %}
         </div>
-        {% endfor %}
-                <!-- <div class="select-box" id="select--distribution">
+
+        <!-- <div class="select-box" id="select--distribution">
                     <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
                     <div class="business-name">유통</div>
                 </div>
@@ -56,13 +62,13 @@
     </div>
 </body> -->
 
-<footer>
-    <div id="footer-nav"></div>
-    <div id="footer-info">
-        <div class="footer-info-text">
-            Copyright © DOOBOO All Rights reserved.
-        </div>
-    </div>
-</footer>
+        <footer>
+            <div id="footer-nav"></div>
+            <div id="footer-info">
+                <div class="footer-info-text">
+                    Copyright © DOOBOO All Rights reserved.
+                </div>
+            </div>
+        </footer>
 
 </html>
