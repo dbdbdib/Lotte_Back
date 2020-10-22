@@ -19,19 +19,14 @@
         </div>
 
         <div class="post-container">
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'create' company_chk.pk %}" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <input type="hidden" name="company_type" value="{{company_type}}">
-                <!-- <div class="post-head"> -->
                 {{write_form.title}}
-                <!-- <div class="post-title"> 
-                    </div> -->
-                <!-- </div> -->
-                <!-- <div class="post-content">  -->
                 {{write_form.desc}}
-                <!-- </div> -->
-
+                <!-- {{write_form.boards}} -->
+                
+                <input type="hidden" name="boards_number" value="{{company_chk.pk}}">
 
                 <div class="btn-wrap">
                     <div class="btn--left">
@@ -43,6 +38,8 @@
                     <div class="btn--right">
                         <button class="btn">작성 완료</button>
                     </div>
+            </form>
+                
             </form>
         </div>
     </div>

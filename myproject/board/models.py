@@ -21,7 +21,7 @@ class Company(models.Model):
 ####### post/models.py 합치기 #######
 
 class Post(models.Model):
-    board = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='board', null=True)
+    boards_number = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='board', null=True)
     
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="author_user" )
     title = models.CharField('제목', max_length=100)

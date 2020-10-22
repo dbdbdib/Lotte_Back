@@ -45,7 +45,7 @@ def lotte_add(request, pk):
 def index(request, pk):
     
     company_type = Company.objects.get(pk=pk)
-    company_post = Post.objects.filter(boards=pk)
+    company_post = Post.objects.filter(boards_number=company_type)
     
     all_post = Post.objects.all()
 
@@ -58,7 +58,9 @@ def index(request, pk):
 
 def create(request, pk):
     context = dict()
+
     company_chk = Company.objects.get(pk=pk)
+
     context['company_chk'] = company_chk
 
     if request.method == 'POST':
@@ -74,7 +76,7 @@ def create(request, pk):
             
             return redirect('index', pk)
         else:
-            context['write_form'] = temp_form
+            context['write_form'] = PostForms()
             return render(request, 'write.html', context)
     else:
         context['write_form'] = PostForms()

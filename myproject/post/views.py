@@ -28,11 +28,11 @@ def create(request):
             clean_form.save()
             return redirect('post')
         else:
-            context['write_form'] = temp_form
+            context['write_form'] = PostForms()
             return render(request, 'write.html', context)
     else:
 
-        context['write_form'] = PostForms()
+        context['write_form'] = temp_form
         return render(request, 'write.html', context)
 
 def detail(request,post_id):
