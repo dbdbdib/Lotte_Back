@@ -1,14 +1,106 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>계열별 회사 목록</title>
+    <link rel="stylesheet" href="{% static 'css/post-list.css' %}">
+
 </head>
+
 <body>
-{% for c in company.types.all %}
-    <a href="{% url 'index' c.pk %}"> {{c.subject}} </a><br> 
-{% endfor %}
+
+    <div class="container">
+        <div id="header">
+            <img src="{% static 'img/logo.png' %}" class="logo">
+            <span class="my_page"><a href="">마이페이지</a></span>
+        </div>
+
+        <div id="layout">
+            <div class="company-list">
+                <div id="business-field">{{outer}}<div class="dot--medium"></div>
+                </div>
+
+                {% for c in company.types.all %}
+
+                <div class="company-box">
+                    <a href="{% url 'index' c.pk %}">
+                        <div class="company-name">{{c.subject}}</div>
+                    </a>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="post-container">
+                <!--이거 간격 같게 어케 하나요...??-->
+                <div id="post-list__head">
+                    <div id="post-writer__head" class="post-writer head">닉네임</div>
+                    <div id="post-title__head" class="post-title head">제목</div>
+                    <div id="post-date__head" class="post-date head">게시 날짜</div>
+                    <div id="post-views__head" class="post-views head">조회수</div>
+                    <div id="post-scrap__head" class="post-scrap head">스크랩</div>
+                    <div id="post-comment__head" class="post-comment head">댓글</div>
+                </div>
+
+                <div id="post-list">
+
+                    <div class="post-box">
+                        <div class="post" id="post1">
+                            <div class="post-writer">현트리빈</div>
+                            <div class="post-title">가붕이가 최고야</div>
+                            <div class="post-date">2020.10.09</div>
+                            <div class="post-views">10000</div>
+                            <div class="post-scrap">30</div>
+                            <div class="post-comment">5</div>
+                        </div>
+                    </div>
+
+                    <div class="post-box">
+                        <div class="post" id="post2">
+                            <div class="post-writer"><img src="../img/logo.png" class="nickname-logo">nsbg</div>
+                            <div class="post-title">not silver but gold</div>
+                            <div class="post-date">2020.10.09</div>
+                            <div class="post-views">14000</div>
+                            <div class="post-scrap">20</div>
+                            <div class="post-comment">10</div>
+                        </div>
+                    </div>
+
+                    <div class="post-box">
+                        <div class="post" id="post2">
+                            <div class="post-writer">벤자민</div>
+                            <div class="post-title">제목 글자 수가 많을 경우 테스트 중 제목 글자 수가 많을 경우 테스트 중 제목 글자 수가 많을 경우 테스트 중</div>
+                            <div class="post-date">2020.10.09</div>
+                            <div class="post-views">1</div>
+                            <div class="post-scrap">2</div>
+                            <div class="post-comment">10</div>
+                        </div>
+                    </div>
+
+                </div>
+                <a class="" href="{}">
+                    <div class="btn-wrap">
+                        <button class="btn-create">게시글 작성</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
 </body>
+
+<footer>
+    <div id="footer-nav"></div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
+
 </html>
