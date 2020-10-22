@@ -21,11 +21,11 @@
         <div class="post-container">
             <form method="POST" action="{% url 'create' company_chk.pk %}" enctype="multipart/form-data">
                 {% csrf_token %}
-
+                {{company_chk}}
                 {{write_form.title}}
                 {{write_form.desc}}
                 <!-- {{write_form.boards}} -->
-                
+
                 <input type="hidden" name="boards_number" value="{{company_chk.pk}}">
 
                 <div class="btn-wrap">
@@ -39,7 +39,7 @@
                         <button class="btn">작성 완료</button>
                     </div>
             </form>
-                
+
             </form>
         </div>
     </div>

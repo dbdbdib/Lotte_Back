@@ -52,17 +52,31 @@ def lotte_add(request, pk):
 
 
 def index(request, pk):
+    # company_type = Company.objects.get(pk=pk)
+    company_type = Company.objects.all()
+    specific_company_type = Company.objects.get(pk=pk)
+    company_post = Post.objects.filter(boards_number=specific_company_type)
 
-    company_type = Company.objects.get(pk=pk)
-    company_post = Post.objects.filter(boards_number=company_type)
-    
     all_post = Post.objects.all()
 
     context = dict()
+    #####
+    company = Company.objects.get(pk=pk)
+    context['company'] = company
+#####
     context['all_post'] = all_post
     context['company_type'] = company_type
     context['company_post'] = company_post
 
+# company = Type.objects.get(pk=pk)
+# outer = Type.objects.get(pk=pk)
+
+# context = {'outer': outer}
+
+# company = Type.objects.get(pk=pk)
+# outer = Type.objects.get(pk=pk)
+# context['company'] = company
+# context['outer'] = outer
     return render(request, 'index.html', context)
 
 
@@ -80,10 +94,10 @@ def create(request, pk):
 
         if temp_form.is_valid():
             clean_form = temp_form.save(commit=False)
-            clean_form.author = User.objects.get(id = request.user.id)
+            clean_form.author = User.objects.get(id=request.user.id)
             # 추후에 User.id 할당해야해
             clean_form.save()
-            
+
             return redirect('index', pk)
         else:
             context['write_form'] = PostForms()

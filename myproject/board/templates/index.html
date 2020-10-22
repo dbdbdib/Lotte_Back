@@ -1,37 +1,138 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회사별 게시판</title>
-</head>
-<body>
-    {%if user.is_authenticated%}
-        {{user.nickname}} 님 ㅎㅇ
-        <a href="{% url 'mypage' user.pk %}">마이페이지</a>
-        <a href="{% url 'logout' %}">로그아웃</a>
-    {%else%}
-        <a href="{% url 'signin' %}">로그인</a>
-        <a href="{% url 'select_division' %}">회원가입</a>
-    {%endif%}
+    <link rel="stylesheet" href="{% static 'css/post-list.css' %}">
 
+</head>
+
+
+<body>
+    <!-- {% comment %} -->
+    {% if user.is_authenticated %}
+    {{user.nickname}} 님 ㅎㅇ
+    <a href="{% url 'mypage' user.pk %}">마이페이지</a>
+    <a href="{% url 'logout' %}">로그아웃</a>
+    {%else%}
+    <a href="{% url 'signin' %}">로그인</a>
+    <a href="{% url 'select_division' %}">회원가입</a>
+    {% endif %}
 
     <div class="cnt_post">{{company_post|length}}개의 게시글</div>
-
     <a class="write-btn" href="{% url 'create' company_type.pk %}"> 글쓰기 </a><br>
-    
-    {% for one_post in company_post %}
-    <br>
-    {{one_post}}
-    <br>
-    {{one_post.desc}}
-    <br>
-    {% if one_post.image %}
-    <img src="{{ one_post.image.url }}" alt="alter">
-    이미지
-    {% endif %}
-    <a href="{% url 'detail' company_type.pk one_post.id %}">detail</a><br>
-    <hr>
-    {%endfor%}
+
+
+    <!-- {% endcomment %} -->
+
+    <div class="container">
+        <div id="header">
+            <img src="{% static 'img/logo.png' %}" class="logo">
+            <span class="my_page"><a href="">마이페이지</a></span>
+        </div>
+
+        <div id="layout">
+            <div class="company-list">
+                <div id="business-field">{{outer}}<div class="dot--medium"></div>
+                </div>
+
+                <!-- {% for company in company_type %}
+                {{company}}
+                {% endfor %} -->
+
+                {% for c in company_type %}
+
+                <div class="company-box">
+                    <a href="{% url 'index' c.pk %}">
+                        <div class="company-name">{{c}}</div>
+                    </a>
+                    <a class="write-btn" href="{% url 'create' c.pk %}">
+                        글쓰기
+                    </a>
+
+
+
+                </div>
+                {% endfor %}
+
+            </div>
+            <div class="post-container">
+                <!--이거 간격 같게 어케 하나요...??-->
+                <div id="post-list__head">
+                    <div id="post-writer__head" class="post-writer head">닉네임</div>
+                    <div id="post-title__head" class="post-title head">제목</div>
+                    <div id="post-date__head" class="post-date head">게시 날짜</div>
+                    <div id="post-views__head" class="post-views head">조회수</div>
+                    <div id="post-scrap__head" class="post-scrap head">스크랩</div>
+                    <div id="post-comment__head" class="post-comment head">댓글</div>
+                </div>
+
+                <div id="post-list">
+                    {% for one_post in company_post %}
+
+                    {% comment %}
+                    <a href="{% url 'detail' company_type.pk one_post.id %}">
+                        {% endcomment %}
+                        <div class="post-box">
+                            <div class="post" id="post1">
+                                <div class="post-writer"> {{one_post}} </div>
+                                <div class="post-title"> {{one_post.desc}}</div>
+                                <div class="post-date">{{one_post.create_at|date:"Y-m-d"}}</div>
+
+                                <div class="post-views">10000</div>
+                                <div class="post-scrap">30</div>
+                                <div class="post-comment">5</div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                </div>
+
+                <!-- <div class="post-box">
+                        <div class="post" id="post2">
+                            <div class="post-writer"><img src="../img/logo.png" class="nickname-logo">nsbg</div>
+                            <div class="post-title">not silver but gold</div>
+                            <div class="post-date">2020.10.09</div>
+                            <div class="post-views">14000</div>
+                            <div class="post-scrap">20</div>
+                            <div class="post-comment">10</div>
+                        </div>
+                    </div>
+
+                    <div class="post-box">
+                        <div class="post" id="post2">
+                            <div class="post-writer">벤자민</div>
+                            <div class="post-title">제목 글자 수가 많을 경우 테스트 중 제목 글자 수가 많을 경우 테스트 중 제목 글자 수가 많을 경우 테스트 중</div>
+                            <div class="post-date">2020.10.09</div>
+                            <div class="post-views">1</div>
+                            <div class="post-scrap">2</div>
+                            <div class="post-comment">10</div>
+                        </div>
+                    </div> -->
+                {% comment %}
+                <a class="write-btn" href="{% url 'create' company_type.pk %}">
+                    <div class="btn-wrap">
+                        <button class="btn-create">게시글 작성</button>
+                    </div>
+                </a>
+                {% endcomment %}
+            </div>
+        </div>
+
+    </div>
+
 </body>
+
+<footer>
+    <div id="footer-nav"></div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
+
 </html>
