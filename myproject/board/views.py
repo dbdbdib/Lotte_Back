@@ -7,25 +7,33 @@ from .forms import PostForms, CommentForms
 User = get_user_model()
 
 # 메인페이지 뷰
+
+
 class MainPageView(TemplateView):
     template_name = 'mainpage.html'
-    
+
     # context 뿌리는 메소드
     def get_context_data(self, **kwargs):
 
         user = self.request.user
         outer = Type.objects.all()
 
-        context = {'user': user, 'outer':outer}
+        context = {'user': user, 'outer': outer}
         return context
-        
+
 # 큰 계열 4개
+
+
 def lotte_outer(request, pk):
     # company 값이 lotte_outer에 같이 넘어감
     company = Type.objects.get(pk=pk)
-    return render(request, 'lotte_outer.html', {'company':company})
+    outer = Type.objects.get(pk=pk)
+
+    return render(request, 'lotte_outer.html', {'company': company, 'outer': outer})
 
 # 회사 목록 추가(추가 다하면 없어도 O)
+
+
 def lotte_add(request, pk):
     company = get_object_or_404(Type, pk=pk)
 
@@ -38,15 +46,16 @@ def lotte_add(request, pk):
         )
 
         return redirect('lotte_outer', pk=company.pk)
-    return render(request, 'lotte_add.html', {'company':company})
+    return render(request, 'lotte_add.html', {'company': company})
 
 ####### post/views.py 합치기 #######
 
+
 def index(request, pk):
-    
+
     company_type = Company.objects.get(pk=pk)
     company_post = Post.objects.filter(board=pk)
-    
+
     all_post = Post.objects.all()
 
     context = dict()
@@ -55,6 +64,7 @@ def index(request, pk):
     context['company_post'] = company_post
 
     return render(request, 'index.html', context)
+
 
 def create(request, pk):
     context = dict()
@@ -68,7 +78,7 @@ def create(request, pk):
 
         if temp_form.is_valid():
             clean_form = temp_form.save()
-            clean_form.author = User.objects.get(id = request.user.id)
+            clean_form.author = User.objects.get(id=request.user.id)
             # 추후에 User.id 할당해야해
             clean_form.save()
             return redirect('index', pk)
@@ -79,65 +89,73 @@ def create(request, pk):
         context['write_form'] = PostForms()
         return render(request, 'write.html', context)
 
+
 def detail(request, pk, post_id):
     context = dict()
 
-    detail_post = Post.objects.get(id = post_id)
+    detail_post = Post.objects.get(id=post_id)
     company_index = Company.objects.get(pk=pk)
-    
+
     context['detail_post'] = detail_post
     context['comment_form'] = CommentForms()
-    context['comment_all'] = Comment.objects.filter(post= Post.objects.get(id = post_id)) # 얘가 listview역할
+    context['comment_all'] = Comment.objects.filter(
+        post=Post.objects.get(id=post_id))  # 얘가 listview역할
     context['company_index'] = company_index
 
-    return render(request,'detail.html',context)
-        
+    return render(request, 'detail.html', context)
+
+
 def update(request, pk, post_id):
     context = dict()
-    
+
     if request.method == "POST":
-        temp_form = PostForms(request.POST,request.FILES, instance=Post.objects.get(id = post_id))
-        
+        temp_form = PostForms(request.POST, request.FILES,
+                              instance=Post.objects.get(id=post_id))
+
         if temp_form.is_valid():
             temp_form.save()
             return redirect('index', pk)
         else:
             context["write_form"] = temp_form
-            return render(request,'write.html',context)
+            return render(request, 'write.html', context)
     else:
-        context["write_form"] = PostForms(instance=Post.objects.get(id = post_id))
-        return render(request,'write.html', context)
-        
-        
+        context["write_form"] = PostForms(
+            instance=Post.objects.get(id=post_id))
+        return render(request, 'write.html', context)
+
+
 def delete(request, pk, post_id):
-    detail_post = Post.objects.get(id = post_id)
+    detail_post = Post.objects.get(id=post_id)
     detail_post.delete()
-    
+
     # User 정보 받아올 수 있을때 사용
     # if detail_post.author == request.user:
     #     detail_post.delete()
     return redirect('index', pk)
-    
+
+
 def create_comment(request, pk, post_id):
     company_index = Company.objects.get(pk=pk)
-    context = {'company_index':company_index}
+    context = {'company_index': company_index}
 
-    if request.method=="POST":
+    if request.method == "POST":
         temp_form = CommentForms(request.POST)
         if temp_form.is_valid():
             clean_form = temp_form.save(commit=False)
-            
-            clean_form.post = Post.objects.get(id = post_id )
-            clean_form.author = User.objects.get(id = request.user.id)
+
+            clean_form.post = Post.objects.get(id=post_id)
+            clean_form.author = User.objects.get(id=request.user.id)
 
             clean_form.save()
             temp_form.save()
         return redirect('detail', pk, post_id)
-        
+
+
 def comment_delete(request, pk, post_id, com_id):
     del_com = Comment.objects.get(id=com_id)
     del_com.delete()
     return redirect('detail', pk, post_id)
+
 
 def scrap(request, post_id):
     context = dict()
