@@ -20,7 +20,7 @@
 
     <a class="write-btn" href="{% url 'create' company_type.pk %}"> 글쓰기 </a><br>
     
-    {% for one_post in company_post %}
+    {% for one_post in all_post %}
     <br>
     {{one_post}}
     <br>

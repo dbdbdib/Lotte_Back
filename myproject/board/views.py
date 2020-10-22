@@ -45,7 +45,7 @@ def lotte_add(request, pk):
 def index(request, pk):
     
     company_type = Company.objects.get(pk=pk)
-    company_post = Post.objects.filter(board=pk)
+    company_post = Post.objects.filter(boards=pk)
     
     all_post = Post.objects.all()
 
@@ -58,8 +58,8 @@ def index(request, pk):
 
 def create(request, pk):
     context = dict()
-    company_type = company_type = Company.objects.get(pk=pk)
-    context['company_type'] = company_type
+    company_chk = Company.objects.get(pk=pk)
+    context['company_chk'] = company_chk
 
     if request.method == 'POST':
         # media 파일 올려주려면, request.FILES 추가해주어야한다.
@@ -67,10 +67,11 @@ def create(request, pk):
         # temp_form.photo = request.FILES['image']
 
         if temp_form.is_valid():
-            clean_form = temp_form.save()
+            clean_form = temp_form.save(commit=False)
             clean_form.author = User.objects.get(id = request.user.id)
             # 추후에 User.id 할당해야해
             clean_form.save()
+            
             return redirect('index', pk)
         else:
             context['write_form'] = temp_form

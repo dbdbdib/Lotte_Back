@@ -9,10 +9,11 @@ class PostForms(ModelForm):
     class Meta:
         model = Post
 
-        fields = ('title', "desc", 'image')
+        fields = ('boards', 'title', "desc", 'image')
 
         widget = {
-            'title': forms.TextInput(attrs={'class': 'temp'})
+            'title': forms.TextInput(attrs={'class': 'temp'}),
+            'boards': forms.HiddenInput()
         }
 
 
