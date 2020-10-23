@@ -39,24 +39,6 @@
             <div class="company-list">
                 <div id="business-field">{{outer}}<div class="dot--medium"></div>
                 </div>
-
-                <!-- {% for company in company_type %}
-                {{company}}
-                {% endfor %} -->
-
-                {% for c in company_type %}
-                <!-- {{ forloop.counter }} -->
-                <a href="{% url 'index' c.pk %}">
-                    <div class="company-box">
-                        <div class="company-name" id={{forloop.counter0}} onclick="change(id)">
-                            {{c}}
-                        </div>
-                        <a class=" write-btn" href="{% url 'create' c.pk %}">
-                            글쓰기
-                        </a>
-                    </div>
-                </a>
-                {% endfor %}
                 {% for c in company.types.all %}
                 {{c}}
                 {% endfor %}
@@ -76,15 +58,13 @@
                 <div id="post-list">
                     {% for one_post in company_post %}
 
-                    {% comment %}
-                    <a href="{% url 'detail' company_type.pk one_post.id %}">
-                        {% endcomment %}
-
+                    <a href="{% url 'detail' company.pk one_post.id %}">
                         <div class="post-box">
                             <div class="post" id="post1">
                                 <div class="post-writer"> {{one_post.id}}
                                 </div>
-                                <div class="post-title"> {{one_post}}</div>
+                                <div class="post-title"> {{one_post}}
+                                </div>
                                 <div class="post-date">{{one_post.create_at|date:"Y-m-d"}}</div>
 
                                 <div class="post-views">10000</div>
@@ -120,13 +100,12 @@
                             <div class="post-comment">10</div>
                         </div>
                     </div> -->
-                {% comment %}
-                <a class="write-btn" href="{% url 'create' company_type.pk %}">
+
+                <a class="write-btn" href="{% url 'create' specific_company_type.pk %}">
                     <div class="btn-wrap">
                         <button class="btn-create">게시글 작성</button>
                     </div>
                 </a>
-                {% endcomment %}
             </div>
         </div>
 
