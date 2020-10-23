@@ -63,7 +63,6 @@ def index(request, pk):
     #####
     company = Company.objects.get(pk=pk)
     context['company'] = company
-#####
     context['all_post'] = all_post
     context['company_type'] = company_type
     context['company_post'] = company_post

@@ -43,20 +43,24 @@
                 <!-- {% for company in company_type %}
                 {{company}}
                 {% endfor %} -->
-
                 {% for c in company_type %}
-
+                <!-- {{ forloop.counter }} -->
                 <div class="company-box">
                     <a href="{% url 'index' c.pk %}">
-                        <div class="company-name">{{c}}</div>
+                        <div class="company-name" id={{forloop.counter0}} onclick="change(id)">
+                            {{c}}
+                        </div>
                     </a>
-                    <a class="write-btn" href="{% url 'create' c.pk %}">
+                    <a class=" write-btn" href="{% url 'create' c.pk %}">
                         글쓰기
                     </a>
 
 
 
                 </div>
+                {% endfor %}
+                {% for c in company.types.all %}
+                {{c}}
                 {% endfor %}
 
             </div>
@@ -77,10 +81,12 @@
                     {% comment %}
                     <a href="{% url 'detail' company_type.pk one_post.id %}">
                         {% endcomment %}
+
                         <div class="post-box">
                             <div class="post" id="post1">
-                                <div class="post-writer"> {{one_post}} </div>
-                                <div class="post-title"> {{one_post.desc}}</div>
+                                <div class="post-writer"> {{one_post.id}}
+                                </div>
+                                <div class="post-title"> {{one_post}}</div>
                                 <div class="post-date">{{one_post.create_at|date:"Y-m-d"}}</div>
 
                                 <div class="post-views">10000</div>
@@ -88,7 +94,8 @@
                                 <div class="post-comment">5</div>
                             </div>
                         </div>
-                        {%endfor%}
+                    </a>
+                    {%endfor%}
                 </div>
 
                 <!-- <div class="post-box">
@@ -134,5 +141,34 @@
         </div>
     </div>
 </footer>
+
+<script>
+
+
+    const a = "{{company_type|length}}";
+    // console.log(a)
+
+    // array2 = "{{company_type}}"
+    // for (i = 0; i < array2.length; i++) {
+    //     console.log(array2[i])
+    // }
+    function change(i) {
+        var button = document.getElementById(i);
+        button.style.background = 'red';
+    }
+
+
+    // for (var i = 0; i < a; ++i) {
+    //     button1 = document.getElementsByName(i);
+    // }
+
+    // var button1 = document.getElementById('company-' + i);
+
+    // button1.addEventListener("click", function () {
+    //     button1.style.backgroundColor = "red";
+    // });
+
+
+</script>
 
 </html>
