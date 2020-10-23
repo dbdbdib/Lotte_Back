@@ -121,8 +121,10 @@ def detail(request, pk, post_id):
     context = dict()
 
     detail_post = Post.objects.get(id=post_id)
-
     company_chk = Company.objects.get(pk=pk)
+
+    specific_company_type = Company.objects.get(pk=pk)
+    context['specific_company_type'] = specific_company_type
 
     context['detail_post'] = detail_post
     context['comment_form'] = CommentForms()
