@@ -52,12 +52,12 @@
                 <div id="post-list">
 
                     {% for one_post in all_post %}
-                    {% if outer.name == '식품' %}
+                    {% if outer.id == 5 %}
 
                     {% if one_post.boards_number in food_company_post %}
 
-                    <a href="{% url 'detai' specific_company_type.pk one_post.id }">
-                            <div class="post-box">
+                    <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
+                        <div class="post-box">
                                 <div class="post" id="post1">
                                     <div class="post-writer"> {{one_post.boards_number}}
                                     </div>
@@ -73,10 +73,9 @@
                         </a>
                         {% endif %} 
 
-                    {% elif outer.name == '유통' %}
+                    {% elif outer.id == 6 %}
                     {% if one_post.boards_number in retail_company_post %}
-
-                    <a href=" {% url 'detai' specific_company_type.pk one_post.id }">
+                    <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
                         <div class="post-box">
                             <div class="post" id="post1">
                                 <div class="post-writer"> {{one_post.boards_number}}
@@ -91,7 +90,8 @@
                             </div>
                         </div>
                     </a>
-                   {% endif %} {% elif outer.id == 7 %} {% if one_post.boards_number in chem_company_post %} <a href=" {% url 'detai' specific_company_type.pk one_post.id }">
+                   {% endif %} {% elif outer.id == 7 %} {% if one_post.boards_number in chem_company_post %} <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
+
                        <div class="post-box">
                            <div class="post" id="post1">
                                <div class="post-writer"> {{one_post.boards_number}}
@@ -110,8 +110,9 @@
 
                   {% elif outer.id == 8 %} 
                   {% if one_post.boards_number in tour_company_post %} 
-                  <a href=" {% url 'detai' specific_company_type.pk one_post.id }">
-                      <div class="post-box">
+                  <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
+
+                    <div class="post-box">
                           <div class="post" id="post1">
                               <div class="post-writer"> {{one_post.boards_number}}
                               </div>
