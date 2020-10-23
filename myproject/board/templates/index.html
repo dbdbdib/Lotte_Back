@@ -37,11 +37,9 @@
 
         <div id="layout">
             <div class="company-list">
-                <div id="business-field">{{outer}}<div class="dot--medium"></div>
+                <div id="business-field">{{specific_company_type}}<div class="dot--medium"></div>
                 </div>
-                {% for c in company.types.all %}
-                {{c}}
-                {% endfor %}
+
 
             </div>
             <div class="post-container">
@@ -75,9 +73,7 @@
                     </a>
                     {%endfor%}
                 </div>
-                {% for com in company.types.all %}
-                {com}}
-                {% endfor %}
+
 
                 <!-- <div class="post-box">
                         <div class="post" id="post2">

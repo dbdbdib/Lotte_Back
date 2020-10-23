@@ -52,8 +52,6 @@ def lotte_add(request, pk):
 
 
 def index(request, pk):
-    # company_type = Company.objects.get(pk=pk)
-    # company_type = Company.objects.all()
     specific_company_type = Company.objects.get(pk=pk)
     company_post = Post.objects.filter(boards_number=specific_company_type)
 
@@ -67,15 +65,8 @@ def index(request, pk):
     context['specific_company_type'] = specific_company_type
     context['company_post'] = company_post
 
-# company = Type.objects.get(pk=pk)
-# outer = Type.objects.get(pk=pk)
-
-# context = {'outer': outer}
-
-# company = Type.objects.get(pk=pk)
-# outer = Type.objects.get(pk=pk)
-# context['company'] = company
-# context['outer'] = outer
+    # outer = get_object_or_404(Type, pk=pk)
+    # context['outer'] = outer
     return render(request, 'index.html', context)
 
 
@@ -110,7 +101,7 @@ def detail(request, pk, post_id):
     context = dict()
 
     detail_post = Post.objects.get(id=post_id)
-    
+
     company_chk = Company.objects.get(pk=pk)
 
     context['detail_post'] = detail_post
@@ -125,9 +116,9 @@ def detail(request, pk, post_id):
 def update(request, pk, post_id):
     context = dict()
     company_chk = Company.objects.get(pk=pk)
-    
+
     context['company_chk'] = company_chk
-    
+
     if request.method == "POST":
         temp_form = PostForms(request.POST, request.FILES,
                               instance=Post.objects.get(id=post_id))
