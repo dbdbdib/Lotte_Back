@@ -25,11 +25,35 @@ class MainPageView(TemplateView):
 
 
 def lotte_outer(request, pk):
-    # company 값이 lotte_outer에 같이 넘어감
-    company = Type.objects.get(pk=pk)
-    outer = Type.objects.get(pk=pk)
 
-    return render(request, 'lotte_outer.html', {'company': company, 'outer': outer})
+    context = dict()
+
+    outer = Type.objects.get(pk=pk)  # 4계열
+    all_post = Post.objects.all()  # 전체 글
+    specific_company_type = Company.objects.get(pk=pk)
+
+    # 각 계열 별 filtering
+    food_company_post = Company.objects.filter(company_type=5)
+    retail_company_post = Company.objects.filter(company_type=6)
+    chem_company_post = Company.objects.filter(company_type=7)
+    tour_company_post = Company.objects.filter(company_type=8)
+
+    # 필요없는 듯
+    # company_post = Post.objects.filter(boards_number=specific_company_type)
+    # context['company_post'] = company_post
+
+    context['outer'] = outer
+    context['all_post'] = all_post
+
+    context['food_company_post'] = food_company_post
+    context['retail_company_post'] = retail_company_post
+    context['chem_company_post'] = chem_company_post
+    context['tour_company_post'] = tour_company_post
+
+    # detail page  url 다룰 때 필요한데, 지금은 작동 X
+    context['specific_company_type'] = specific_company_type
+
+    return render(request, 'lotte_outer.html', context)
 
 # 회사 목록 추가(추가 다하면 없어도 O)
 
@@ -52,21 +76,17 @@ def lotte_add(request, pk):
 
 
 def index(request, pk):
+
+    all_post = Post.objects.all()
     specific_company_type = Company.objects.get(pk=pk)
     company_post = Post.objects.filter(boards_number=specific_company_type)
 
-    all_post = Post.objects.all()
-
     context = dict()
-    #####
-    company = Company.objects.get(pk=pk)
-    context['company'] = company
+
     context['all_post'] = all_post
     context['specific_company_type'] = specific_company_type
     context['company_post'] = company_post
 
-    # outer = get_object_or_404(Type, pk=pk)
-    # context['outer'] = outer
     return render(request, 'index.html', context)
 
 

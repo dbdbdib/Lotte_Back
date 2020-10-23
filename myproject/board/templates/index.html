@@ -13,7 +13,7 @@
 
 
 <body>
-    <!-- {% comment %} -->
+    {% comment %}
     {% if user.is_authenticated %}
     {{user.nickname}} 님 ㅎㅇ
     <a href="{% url 'mypage' user.pk %}">마이페이지</a>
@@ -27,11 +27,14 @@
     <a class="write-btn" href="{% url 'create' company_type.pk %}"> 글쓰기 </a><br>
 
 
-    <!-- {% endcomment %} -->
+    {% endcomment %}
+
 
     <div class="container">
         <div id="header">
-            <img src="{% static 'img/logo.png' %}" class="logo">
+            <a href="{% url 'mainpage' %}">
+                <img src="{% static 'img/logo.png' %}" class="logo">
+            </a>
             <span class="my_page"><a href="">마이페이지</a></span>
         </div>
 
@@ -56,7 +59,7 @@
                 <div id="post-list">
                     {% for one_post in company_post %}
 
-                    <a href="{% url 'detail' company.pk one_post.id %}">
+                    <a href="{% url 'detail' specific_company_type.pk one_post.id %}">
                         <div class="post-box">
                             <div class="post" id="post1">
                                 <div class="post-writer"> {{one_post.id}}
