@@ -13,7 +13,7 @@
 
 
 <body>
-    <!-- {% comment %} -->
+    {% comment %}
     {% if user.is_authenticated %}
     {{user.nickname}} 님 ㅎㅇ
     <a href="{% url 'mypage' user.pk %}">마이페이지</a>
@@ -27,21 +27,22 @@
     <a class="write-btn" href="{% url 'create' company_type.pk %}"> 글쓰기 </a><br>
 
 
-    <!-- {% endcomment %} -->
+    {% endcomment %}
+
 
     <div class="container">
         <div id="header">
-            <img src="{% static 'img/logo.png' %}" class="logo">
+            <a href="{% url 'mainpage' %}">
+                <img src="{% static 'img/logo.png' %}" class="logo">
+            </a>
             <span class="my_page"><a href="">마이페이지</a></span>
         </div>
 
         <div id="layout">
             <div class="company-list">
-                <div id="business-field">{{outer}}<div class="dot--medium"></div>
+                <div id="business-field">{{specific_company_type}}<div class="dot--medium"></div>
                 </div>
-                {% for c in company.types.all %}
-                {{c}}
-                {% endfor %}
+
 
             </div>
             <div class="post-container">
@@ -57,16 +58,14 @@
 
                 <div id="post-list">
                     {% for one_post in company_post %}
-                    </a>
-                    {% comment %}
-                    
-                        {% endcomment %}
 
+                    <a href="{% url 'detail' specific_company_type.pk one_post.id %}">
                         <div class="post-box">
                             <div class="post" id="post1">
                                 <div class="post-writer"> {{one_post.id}}
                                 </div>
-                                <div class="post-title"> <a href="{% url 'detail' company.pk one_post.id %}">{{one_post}}</a></div>
+                                <div class="post-title"> {{one_post}}
+                                </div>
                                 <div class="post-date">{{one_post.create_at|date:"Y-m-d"}}</div>
 
                                 <div class="post-views">10000</div>
@@ -77,6 +76,7 @@
                     </a>
                     {%endfor%}
                 </div>
+
 
                 <!-- <div class="post-box">
                         <div class="post" id="post2">
@@ -99,9 +99,6 @@
                             <div class="post-comment">10</div>
                         </div>
                     </div> -->
-                {% comment %}
-          
-                {% endcomment %}
 
                 <a class="write-btn" href="{% url 'create' specific_company_type.pk %}">
                     <div class="btn-wrap">

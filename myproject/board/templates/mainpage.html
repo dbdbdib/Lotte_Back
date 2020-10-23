@@ -32,9 +32,19 @@
 
             {% for o in outer %}
             <a href="{% url 'lotte_outer' o.pk %}">
-
-                <div class="select-box" id="select--food" onmouseover="mouseOnEvent()">
-                    <div class="logo-box"><img src="/media/images/logo2.png" alt="logo" class="business-logo"></div>
+                <div class="select-box" id="select--food">
+                    {% if forloop.counter == 1 %}
+                    <div class="logo-box"><img src="{% static 'img/1.png' %}" alt="logo" class="business-logo"></div>
+                    {% elif forloop.counter == 2 %}
+                    <div class="logo-box"><img src="{% static 'img/2.png' %}" alt="logo" class="business-logo">
+                    </div>
+                    {% elif forloop.counter == 3 %}
+                    <div class="logo-box"><img src="{% static 'img/3.png' %}" alt="logo" class="business-logo">
+                    </div>
+                    {% else %}
+                    <div class="logo-box"><img src="{% static 'img/4.png' %}" alt="logo" class="business-logo">
+                    </div>
+                    {% endif %}
                     <div class="business-name">
                         {{o}}
                     </div>
