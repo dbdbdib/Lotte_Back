@@ -43,21 +43,19 @@
                 <!-- {% for company in company_type %}
                 {{company}}
                 {% endfor %} -->
+
                 {% for c in company_type %}
                 <!-- {{ forloop.counter }} -->
-                <div class="company-box">
-                    <a href="{% url 'index' c.pk %}">
+                <a href="{% url 'index' c.pk %}">
+                    <div class="company-box">
                         <div class="company-name" id={{forloop.counter0}} onclick="change(id)">
                             {{c}}
                         </div>
-                    </a>
-                    <a class=" write-btn" href="{% url 'create' c.pk %}">
-                        글쓰기
-                    </a>
-
-
-
-                </div>
+                        <a class=" write-btn" href="{% url 'create' c.pk %}">
+                            글쓰기
+                        </a>
+                    </div>
+                </a>
                 {% endfor %}
                 {% for c in company.types.all %}
                 {{c}}
@@ -97,6 +95,9 @@
                     </a>
                     {%endfor%}
                 </div>
+                {% for com in company.types.all %}
+                {com}}
+                {% endfor %}
 
                 <!-- <div class="post-box">
                         <div class="post" id="post2">
