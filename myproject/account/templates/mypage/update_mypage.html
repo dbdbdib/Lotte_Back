@@ -12,7 +12,10 @@
 <body>
     <div class="background">
         <div class="header">
-            <img src="/media/images/logo.png" class="logo">
+            <a href="{% url 'mainpage' %}">
+
+                <img src="/media/images/logo.png" class="logo">
+            </a>
             <a href="{% url 'logout' %}">
                 <div class="logout-btn">
                     로그아웃
@@ -68,11 +71,12 @@
                         method="post">
                         {% csrf_token %}
 
-                        <input type="text" name="nickname_form-nickname" maxlength="20" required id="id_nickname_form-nickname" value="{{user.nickname}}">
+                        <input type="text" name="nickname_form-nickname" maxlength="20" required
+                            id="id_nickname_form-nickname" value="{{user.nickname}}">
 
                         <input type="submit" name="{{ nickname_form.prefix }}-submit" value="닉네임 수정" />
                     </form>
-                    
+
                     <hr>
 
                     <!-- 사진 수정 부분 -->
@@ -81,7 +85,7 @@
                         method="post">
                         {% csrf_token %}
 
-                        <input type="file" name="picture_form-picture" required id="id_picture_form-picture" >
+                        <input type="file" name="picture_form-picture" required id="id_picture_form-picture">
 
                         <input type="submit" name="{{ picture_form.prefix }}-submit" value="프로필사진 수정" />
                     </form>
@@ -90,14 +94,17 @@
 
                     <!-- 비번 수정 부분 -->
                     <form id='' class="" action="{% url 'update_mypage' user.pk %}" enctype="multipart/form-data"
-                    method="post">
-                    {% csrf_token %}
-                    <input type="pasword" name="password_form-old_password" autofocus="" required id="id_password_form-old_password">
-                    <input type="pasword" name="password_form-new_password1" autofocus="" required id="id_password_form-new_password1">
-                    <input type="password" name="password_form-new_password2" autofocus="" required id="id_password_form-new_password2">
+                        method="post">
+                        {% csrf_token %}
+                        <input type="pasword" name="password_form-old_password" autofocus="" required
+                            id="id_password_form-old_password">
+                        <input type="pasword" name="password_form-new_password1" autofocus="" required
+                            id="id_password_form-new_password1">
+                        <input type="password" name="password_form-new_password2" autofocus="" required
+                            id="id_password_form-new_password2">
 
-                    <input type="submit" name="{{ password_form.prefix }}-submit" value="비밀번호 수정" />
-                </form>
+                        <input type="submit" name="{{ password_form.prefix }}-submit" value="비밀번호 수정" />
+                    </form>
 
 
                     <!-- 에러창 뜰 부분 (지금은 메시지로 표시) -->

@@ -12,7 +12,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="/media/images/logo.png" class="logo">
+            <a href="{% url 'mainpage' %}">
+
+                <img src="/media/images/logo.png" class="logo">
+            </a>
             <div class="user-interaction-wrap">
 
                 {%if user.is_authenticated%}

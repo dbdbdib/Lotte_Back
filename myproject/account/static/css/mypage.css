@@ -23,7 +23,7 @@
     width: 100px;
     height: 36px;
     font: normal normal normal 20px/55px Apple SD Gothic Neo;
-    display: inline-block;
+    display: inline;
 }
 
 .board-wrap {
