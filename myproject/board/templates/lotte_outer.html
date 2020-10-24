@@ -53,12 +53,10 @@
 
                     {% for one_post in all_post %}
                     {% if outer.id == 5 %}
-
-                    {% if one_post.boards_number in food_company_post %}
-
+                    {% if one_post.boards_number in posts %}
                     <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
                         <div class="post-box">
-                                <div class="post" id="post1">
+                            <div class="post" id="post1">
                                     <div class="post-writer"> {{one_post.boards_number}}
                                     </div>
                                     <div class="post-title"> {{one_post}}
@@ -68,10 +66,10 @@
                                     <div class="post-views">10000</div>
                                     <div class="post-scrap">30</div>
                                     <div class="post-comment">5</div>
-                                </div>
                             </div>
-                        </a>
-                        {% endif %} 
+                        </div>
+                    </a>
+                    {% endif %} 
 
                     {% elif outer.id == 6 %}
                     {% if one_post.boards_number in retail_company_post %}
@@ -83,7 +81,6 @@
                                 <div class="post-title"> {{one_post}}
                                 </div>
                                 <div class="post-date">{{one_post.create_at|date:"Y-m-d"}}</div>
-
                                 <div class="post-views">10000</div>
                                 <div class="post-scrap">30</div>
                                 <div class="post-comment">5</div>
@@ -91,9 +88,8 @@
                         </div>
                     </a>
                    {% endif %} {% elif outer.id == 7 %} {% if one_post.boards_number in chem_company_post %} <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
-
                        <div class="post-box">
-                           <div class="post" id="post1">
+                            <div class="post" id="post1">
                                <div class="post-writer"> {{one_post.boards_number}}
                                </div>
                                <div class="post-title"> {{one_post}}
@@ -103,7 +99,7 @@
                                <div class="post-views">10000</div>
                                <div class="post-scrap">30</div>
                                <div class="post-comment">5</div>
-                           </div>
+                            </div>
                        </div>
                    </a>
                   {% endif %} 
@@ -111,9 +107,8 @@
                   {% elif outer.id == 8 %} 
                   {% if one_post.boards_number in tour_company_post %} 
                   <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
-
                     <div class="post-box">
-                          <div class="post" id="post1">
+                        <div class="post" id="post1">
                               <div class="post-writer"> {{one_post.boards_number}}
                               </div>
                               <div class="post-title"> {{one_post}}
@@ -123,23 +118,33 @@
                               <div class="post-views">10000</div>
                               <div class="post-scrap">30</div>
                               <div class="post-comment">5</div>
-                          </div>
-                      </div>
-                  </a>
-                 {% endif %} {% endif %} {% endfor %} </div>
-
-
-                </div>
-                <a class="" href=" {}">
-                    <div class="btn-wrap">
-                        <button class="btn-create">게시글 작성</button>
+                        </div>
                     </div>
                 </a>
+                 {% endif %} {% endif %} {% endfor %} </div>
+                        <div class="paginator">
+                            {%if posts.has_previous%} <a href="?page=1">First</a>
+                            <a href="?page={{posts.previous_page_number}}">Previous</a>
+                            {%endif%}
+
+                            <span>{{posts.number}}</span>
+                            <span>of</span>
+                            <span>{{posts.paginator.num_pages}}</span>
+
+                            {%if posts.has_next%}
+                            <a href="?page={{posts.next_page_number}}">Next</a>
+                            <a href="?page={{posts.paginator.num_pages}}">Last</a>
+                            {%endif%}
+                        </div>
+
+                        <a class="write-btn" href=" {}">
+                            <div class="btn-wrap">
+                                <button class="btn-create">게시글 작성</button>
+                            </div>
+                        </a>
+                </div>
             </div>
         </div>
-
-
-
 </body>
 
 <footer>

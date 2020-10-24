@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView
 from .models import Type, Company, Post, Comment
 from .forms import PostForms, CommentForms
+from django.core.paginator import Paginator
 
 User = get_user_model()
 
@@ -49,6 +50,12 @@ def lotte_outer(request, pk):
     context['retail_company_post'] = retail_company_post
     context['chem_company_post'] = chem_company_post
     context['tour_company_post'] = tour_company_post
+
+    # paginator
+    paginator = Paginator(food_company_post, 8)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    context['posts'] = posts
 
     # detail page  url 다룰 때 필요한데, 지금은 작동 X
     context['specific_company_type'] = specific_company_type
