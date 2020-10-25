@@ -6,89 +6,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내가 쓴 글</title>
-    <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/마이페이지.css' %}">
+    <link rel="stylesheet" href="{% static 'css/마이페이지-좌측메뉴.css' %}">
 </head>
 
 <body>
-    <div class="background">
-        <div class="header">
+    <div class="container">
+        <div id="header">
             <a href="{% url 'mainpage' %}">
                 <img src="/media/images/logo.png" class="logo">
             </a>
-            <div class="logout-btn">
-                {{user.nickname}} | 로그아웃
-            </div>
+            <span id="logout"><a href="{% url 'logout' %}">로그아웃</a></span>
         </div>
+
 
         <!-- 로그인한 사람의 마이페이지가 맞는 경우 -->
         {%if user.pk is pk %}
 
-        <div class="board-wrap">
-            <div class="comp-wrap">
-                <div class="comp-title">
-                    마이페이지
+        <div id="layout">
+            <div id="my-page">마이페이지<div class="dot--medium"></div>
+            </div>
+            <div class="menu-list">
+                <div class="menu-box" id="current-menu">
+                    <a href="{% url 'mypost' user.pk %}">
+                        <div class="menu-name">내가 쓴 글</div>
+                    </a>
                 </div>
-                <div class="comp-list">
-                    <div class="comp-box">
-                        <div class="comp-name" id="name2">
-                            <a href="{% url 'mypost' user.pk %}">내가쓴 글</a>
-                        </div>
-                    </div>
-
-                    <div class="comp-box">
-                        <div class="comp-name" id="name3">
-                            스크랩한 글
-                        </div>
-                    </div>
-
-                    <!-- 요 부분 예쁘게 수정해야돼요 -->
-                    <div class="comp-box">
-                        <div class="comp-name" id="name3">
-                            <a href="{% url 'update_mypage' user.pk %}">정보수정</a>
-                        </div>
-                    </div>
+                <div class="menu-box">
+                    <a href="">
+                        <div class="menu-name">스크랩한 글</div>
+                    </a>
                 </div>
+                <div class="menu-box">
+                    <a href="{% url 'update_mypage' user.pk %}">
+                        <div class="menu-name">정보 수정</div>
+                    </a>
+                </div>
+                </a>
             </div>
 
 
             <div class="post-wrap">
-                <div class="post-title">
+                <!-- <div class="post-title">
                     제목 | 게시 날짜 | 조회 | 스크랩 | 댓글
-                </div>
-                <div class="post-box-wrap">
-                    {% for one_post in mypost %}
-                    <a href="{% url 'detail' one_post.boards_number.id one_post.id %}">
-                    <div class="post-box">
-                        <div class="post" id="post1">
-                            {{one_post.id}} | {{one_post}} | {{one_post.create_at|date:"Y-m-d"}} | 10000 | 30 | 5
-                        </div>
+                </div> -->
+                <div class="post-container">
+                    <div id="post-list__head">
+                        <div id="post-writer__head" class="post-writer head">닉네임</div>
+                        <div id="post-title__head" class="post-title head">제목</div>
+                        <div id="post-date__head" class="post-date head">게시 날짜</div>
+                        <div id="post-views__head" class="post-views head">조회수</div>
+                        <div id="post-scrap__head" class="post-scrap head">스크랩</div>
+                        <div id="post-comment__head" class="post-comment head">댓글</div>
                     </div>
-                    </a>
-                    {%endfor%}
+                    <div id="post-list">
+
+                        {% for one_post in mypost %}
+                        <a href="{% url 'detail' one_post.boards_number.id one_post.id %}">
+                            <div class="post-box">
+                                <div class="post" id="post1">
+                                    <div class="post-writer">{{one_post.id}}</div>
+                                    <div class="post-title">{{one_post}}</div>
+                                    <div class="post-date">{{one_post.create_at|date:"Y-m-d"}}</div>
+                                    <div class="post-views">10000</div>
+                                    <div class="post-scrap">30</div>
+                                    <div class="post-comment">5</div>
+                                </div>
+                            </div>
+                        </a>
+                        {%endfor%}
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- 다른 사람 마이페이지일 경우 -->
-        {% else %}
+                <!-- 다른 사람 마이페이지일 경우 -->
+                {% else %}
 
-        에러에러
+                에러에러
 
-        {% endif %}
-    </div>
-
-
-
-    <div id="footer">
-        <div id="footer-nav">
-            <div class="container"></div>
-        </div>
-        <div id="footer-info">
-            <div class="footer-info-text">
-                Copyright © DOOBOO All Rights reserved.
+                {% endif %}
             </div>
         </div>
     </div>
+
 </body>
+<footer>
+    <div id="footer-nav"></div>
+    <div id="footer-info">
+        <div class="footer-info-text">
+            Copyright © DOOBOO All Rights reserved.
+        </div>
+    </div>
+</footer>
 
 </html>

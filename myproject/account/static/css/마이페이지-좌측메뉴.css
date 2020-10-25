@@ -1,0 +1,39 @@
+/* 메뉴 리스트 */
+#my-page {
+  position: absolute;
+  top: -30px;
+  left: -200px;
+  width: 400px;
+  font-size: 55px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.menu-list {
+  width: 200px;
+  margin-top: 92px;
+}
+
+.menu-box {
+  width: 100%;
+  height: 50px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 5px 5px 5px #00000029;
+  border: 1px solid #707070;
+  border-radius: 11px;
+  opacity: 1;
+  margin-bottom: 20px;
+}
+
+#current-menu {
+  border: 2px solid #000000;
+  font-weight: 600;
+}
+
+.menu-name {
+  margin-top: 13px;
+  margin-bottom: 13px;
+  font-size: 20px;
+  text-align: center;
+}
+

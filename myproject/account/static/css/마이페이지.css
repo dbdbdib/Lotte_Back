@@ -1,0 +1,185 @@
+* {
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+body {
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.dot--medium {
+  /* size */
+  width: 15px;
+  height: 15px;
+  /* design */
+  background: #da291c;
+  border-radius: 3px;
+  transform: rotate(45deg);
+  /* position */
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.container {
+  width: 1200px;
+  background: #FFFFFF;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+/* 네비게이션 바 */
+#header {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.logo {
+  width: 113px;
+  height: 113px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#logout {
+  text-align: center;
+  color: #000000;
+  font-size: 22px;
+  position: absolute;
+  top: 40px;
+  right: -50px;
+}
+
+#logout:hover {
+  font-weight: 600;
+}
+
+/* 레이아웃 */
+#layout {
+  display: flex;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+/* 내가 쓴 글 or 스크랩한 글 */
+.post-container {
+  margin-top: 56px;
+  width: 980px;
+  margin-left: 20px;
+}
+
+#post-list__head {
+  width: 960px;
+
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
+
+  display: flex;
+  flex-shrink: 0;
+}
+
+#post-list {
+  border: 1px solid #EFEFEF;
+  width: 100%;
+  height: 650px;
+  background: #EFEFEF 0% 0% no-repeat padding-box;
+  border-radius: 17px;
+}
+
+.post-box {
+  margin: 10px auto;
+  width: 960px;
+  height: 50px;
+  background: #FFFFFF;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.post {
+  text-align: center;
+  vertical-align: middle;
+
+  font-size: 18px;
+  color: #333333;
+
+  display: flex;
+  flex-shrink: 0;
+}
+
+.post>div {
+  line-height: 50px;
+}
+
+/* ----- 게시글 정보 ----- */
+.post-writer {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-title {
+  width: 380px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-date {
+  width: 110px;
+}
+
+.post-views,.post-scrap,.post-comment {
+  width: 90px;
+}
+
+.head {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* --------------------------------------------- */
+
+.nickname-logo {
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+/* footer */
+footer {
+  margin-top: 50px;
+  width: 100%;
+  height: 259px;
+  background: #55585A;
+}
+
+#footer-nav {
+  height: 187px;
+}
+
+#footer-info {
+  border-top: 1px solid black;
+  height: 72px;
+}
+
+.footer-info-text {
+  margin-top: 16px;
+  margin-left: 50px;
+  font-size: 16px;
+  color: #FFFFFF;
+  opacity: 1;
+}
