@@ -20,6 +20,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .forms import SignUpForm, IncumbentSignUpForm, SignInForm, NicknameUpdateForm, PictureUpdateForm, PasswordUpdateForm
 from .models import User
+from board.models import Post
 
 # Create your views here.
 
@@ -112,19 +113,6 @@ class SignInView(LoginView):
 
 
 
-# 마이페이지 뷰
-class MypageView(TemplateView):
-    template_name = 'mypage/mypage.html'
-
-    # context 뿌리는 메소드
-    def get_context_data(self, **kwargs):
-
-        user = self.request.user
-        context = {'user': user}
-        return context
-
-
-
 # 마이페이지 정보 수정
 class UpdateMypageView(TemplateView):
     ### TemplateResponseMixin
@@ -175,3 +163,12 @@ class UpdateMypageView(TemplateView):
             messages.error(request, '저장x, 다시 확인')
 
         return self.render_to_response(context)
+
+# 마이페이지 내가쓴글 뷰
+def mypost(request, pk):
+    user = request.user
+    mypost = Post.objects.filter(author=user)
+
+    context = {'user':user, 'mypost':mypost, 'pk':pk}
+
+    return render(request, 'mypage/mypost.html', context)

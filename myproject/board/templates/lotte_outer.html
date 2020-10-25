@@ -73,7 +73,7 @@
 
                     {% elif outer.id == 6 %}
                     {% if one_post.boards_number in retail_company_post %}
-                    <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
+                    <a href=" {% url 'detail' specific_company_type.pk one_post.id %}">
                         <div class="post-box">
                             <div class="post" id="post1">
                                 <div class="post-writer"> {{one_post.boards_number}}
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                     </a>
-                   {% endif %} {% elif outer.id == 7 %} {% if one_post.boards_number in chem_company_post %} <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
+                   {% endif %} {% elif outer.id == 7 %} {% if one_post.boards_number in chem_company_post %} <a href=" {% url 'detail' specific_company_type.pk one_post.id %}">
                        <div class="post-box">
                             <div class="post" id="post1">
                                <div class="post-writer"> {{one_post.boards_number}}
@@ -106,7 +106,7 @@
 
                   {% elif outer.id == 8 %} 
                   {% if one_post.boards_number in tour_company_post %} 
-                  <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
+                  <a href=" {% url 'detail' specific_company_type.pk one_post.id %}">
                     <div class="post-box">
                         <div class="post" id="post1">
                               <div class="post-writer"> {{one_post.boards_number}}
@@ -136,12 +136,13 @@
                             <a href="?page={{posts.paginator.num_pages}}">Last</a>
                             {%endif%}
                         </div>
-
+<!-- 
                         <a class="write-btn" href=" {}">
                             <div class="btn-wrap">
                                 <button class="btn-create">게시글 작성</button>
                             </div>
                         </a>
+                         -->
                 </div>
             </div>
         </div>
