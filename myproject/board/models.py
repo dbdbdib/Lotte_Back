@@ -31,6 +31,7 @@ class Post(models.Model):
 
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="author_user")
+
     title = models.CharField('제목', max_length=100)
     desc = models.TextField('내용')
 

@@ -4,7 +4,8 @@ from django.views.generic import TemplateView
 from .models import Type, Company, Post, Comment
 from .forms import PostForms, CommentForms
 from django.core.paginator import Paginator
-
+from django.http import HttpResponse
+import json
 User = get_user_model()
 
 # 메인페이지 뷰
@@ -51,14 +52,38 @@ def lotte_outer(request, pk):
     context['chem_company_post'] = chem_company_post
     context['tour_company_post'] = tour_company_post
 
+    context['specific_company_type'] = specific_company_type
+
     # paginator
-    paginator = Paginator(food_company_post, 8)
+    all_company_post = [food_company_post,
+                        retail_company_post,
+                        chem_company_post,
+                        tour_company_post]
+# food_company_post
+    paginator = Paginator(food_company_post, 6)
     page = request.GET.get('page')
-    posts = paginator.get_page(page)
-    context['posts'] = posts
+    food_company_post = paginator.get_page(page)
+    context['food_company_post'] = food_company_post
+
+# retail_company_post
+    paginator = Paginator(retail_company_post, 6)
+    page = request.GET.get('page')
+    retail_company_post = paginator.get_page(page)
+    context['retail_company_post'] = retail_company_post
+
+# chem_company_post
+    paginator = Paginator(chem_company_post, 6)
+    page = request.GET.get('page')
+    chem_company_post = paginator.get_page(page)
+    context['chem_company_post'] = chem_company_post
+
+# tour_company_post
+    # paginator = Paginator(tour_company_post, 6)
+    # page = request.GET.get('page')
+    # tour_company_post = paginator.get_page(page)
+    # context['tour_company_post'] = tour_company_post
 
     # detail page  url 다룰 때 필요한데, 지금은 작동 X
-    context['specific_company_type'] = specific_company_type
 
     return render(request, 'lotte_outer.html', context)
 
@@ -93,6 +118,12 @@ def index(request, pk):
     context['all_post'] = all_post
     context['specific_company_type'] = specific_company_type
     context['company_post'] = company_post
+
+    # paginator
+    # paginator = Paginator(food_company_post, 8)
+    # page = request.GET.get('page')
+    # posts = paginator.get_page(page)
+    # context['posts'] = posts
 
     return render(request, 'index.html', context)
 

@@ -89,9 +89,11 @@
 
                                 {%endif%}
                             </button>
-                            <button class="btn">
-                                <a href="{% url 'index' company_chk.pk %}">글 목록</a>
-                            </button>
+                            <a href="{% url 'index' company_chk.pk %}">
+                                <button class="btn">
+                                    글 목록
+                                </button>
+                            </a>
                         </div>
                         <div class="btn--right">
 
@@ -115,7 +117,8 @@
                         <div class="comment-content">{{com}}</div>
                         <div class="comment-control-wrap">
                             <!-- <div class="comment-control"> -->
-                            <a class="comment_delete" href="{% url 'comment_delete' company_chk.pk detail_post.id com.id %}">❌</a>
+                            <a class="comment_delete"
+                                href="{% url 'comment_delete' company_chk.pk detail_post.id com.id %}">❌</a>
                             <!-- </div> -->
                         </div>
                     </div>
@@ -123,7 +126,8 @@
 
 
                     <div class="comment-writing-container">
-                        <form class="comment_form" action="{% url 'create_comment' company_chk.pk detail_post.id %}" method="post">
+                        <form class="comment_form" action="{% url 'create_comment' company_chk.pk detail_post.id %}"
+                            method="post">
 
                             <!-- <div class="comment-writing"> -->
                             {% csrf_token %}
