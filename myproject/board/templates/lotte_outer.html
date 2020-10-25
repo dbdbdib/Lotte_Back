@@ -54,7 +54,7 @@
                     {% for one_post in all_post %}
                     {% if outer.id == 5 %}
                     {% if one_post.boards_number in posts %}
-                    <a href=" {% url 'detail' specific_company_type.pk one_post.id }">
+                    <a href=" {% url 'detail' specific_company_type.pk one_post.id %}">
                         <div class="post-box">
                             <div class="post" id="post1">
                                     <div class="post-writer"> {{one_post.boards_number}}

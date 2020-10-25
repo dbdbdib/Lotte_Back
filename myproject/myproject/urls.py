@@ -41,10 +41,10 @@ urlpatterns = [
     path('mypage/<int:pk>/update', UpdateMypageView.as_view(), name='update_mypage'),
     # path('mypage/<int:pk>/update/nickname_update', NicknameUpdate(), name='nickname_update'),
 
-    path('MainPageView/<int:pk>', lotte_outer, name='lotte_outer'),
+    path('lotte_outer/<int:pk>', lotte_outer, name='lotte_outer'),
 
-    path('MainPageView/<int:pk>/index', index, name='index'),
-    path('MainPageView/<int:pk>/create', create, name='create'),
+    path('index/<int:pk>', index, name='index'),
+    path('create/<int:pk>', create, name='create'),
 
     # <int:pk> 회사 번호
     path('detail/<int:pk>/<int:post_id>', detail, name="detail"),
