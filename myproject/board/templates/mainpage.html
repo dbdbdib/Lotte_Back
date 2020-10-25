@@ -19,8 +19,8 @@
             <div class="user-interaction-wrap">
 
                 {%if user.is_authenticated%}
-                {{user.nickname}} 님 ㅎㅇ
-                <a href="{% url 'mypage' user.pk %}">마이페이지</a>
+                {{user.nickname}} 님 반갑습니다.
+                <a href="{% url 'mypost' user.pk %}">마이페이지</a>
                 <a href="{% url 'logout' %}">로그아웃</a>
                 {%else%}
                 <div class="login-in"><a href="{% url 'signin' %}">로그인</a></div>
